@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPage = 1;
-  final pageController = new PageController(initialPage: 1);
+  final pageController = PageController(initialPage: 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: PageView(
         controller: pageController,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
-          APageScreen(
+          const APageScreen(
             page: 1,
           ),
-          APageScreen(
+          const APageScreen(
             page: 2,
           ),
         ],
@@ -32,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (index) {
           currentPage = index;
           pageController.animateToPage(currentPage,
-              duration: Duration(milliseconds: 300), curve: Curves.easeOut);
-          print(currentPage);
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut);
           setState(() {});
         },
         items: const [
@@ -54,14 +57,12 @@ class _HomeScreenState extends State<HomeScreen> {
 class APageScreen extends StatelessWidget {
   final int page;
 
-  const APageScreen({required this.page});
+  const APageScreen({super.key, required this.page});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(page.toString()),
-      ),
+    return Center(
+      child: Text(page.toString()),
     );
   }
 }
