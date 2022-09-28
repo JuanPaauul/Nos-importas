@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nos_importas/screens/sign_up_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,9 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const APageScreen(
             page: 1,
           ),
-          const APageScreen(
-            page: 2,
-          ),
+          SignUpPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "User",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
+            icon: Icon(Icons.app_registration),
+            label: "Sign Up",
           )
         ],
       ),
