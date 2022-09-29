@@ -40,7 +40,7 @@ class _MiPagina1State extends State<PanicPage> {
                   ),
                 ),
                 child: const Text(
-                  '! BOTON DE PANICO !',
+                  '! BOTÓN DE PÁNICO !',
                   style: TextStyle(
                       color: Colors.red,
                       fontSize: 35.0,
