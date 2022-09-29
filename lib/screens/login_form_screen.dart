@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/functions/input_file.dart';
+import 'package:nos_importas/screens/app_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -74,7 +75,12 @@ class LoginPage extends StatelessWidget {
                     child: MaterialButton(
                       minWidth: double.infinity,
                       height: 60,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AppPage()));
+                      },
                       color: const Color(0xff0095FF),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
