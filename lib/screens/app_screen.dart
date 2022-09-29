@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 
@@ -25,7 +26,7 @@ class _AppPageState extends State<AppPage> {
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           const UserForm(),
-          const APageScreen(page: "Aquí viene un mapa"),
+          const MapsPage(),
           const PanicPage(),
         ],
       ),
@@ -42,7 +43,7 @@ class _AppPageState extends State<AppPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.verified_user_outlined),
             activeIcon: Icon(Icons.verified_user_rounded),
-            label: "Usuario",
+            label: "Usuarios de confianza",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map_outlined),
@@ -52,7 +53,7 @@ class _AppPageState extends State<AppPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.dangerous_outlined),
             activeIcon: Icon(Icons.dangerous_rounded),
-            label: "Peligro",
+            label: "Boton de panico",
           ),
         ],
       ),
