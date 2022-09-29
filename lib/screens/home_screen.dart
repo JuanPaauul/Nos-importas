@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
+import 'package:nos_importas/screens/button_emergency.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
