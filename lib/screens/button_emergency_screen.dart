@@ -3,30 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Animated Conteiner',
-      home: MiPagina1(),
-    );
-  }
-}
-
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
   return reqResRespuestaFromJson(resp.body);
 }
 
-class MiPagina1 extends StatefulWidget {
+class ViewPanic extends StatefulWidget {
   @override
-  State<MiPagina1> createState() => _MiPagina1State();
+  State<ViewPanic> createState() => _MiPagina1State();
 }
 
-class _MiPagina1State extends State<MiPagina1> {
+class _MiPagina1State extends State<ViewPanic> {
   int currentPage = 0;
 
   @override
@@ -167,7 +154,7 @@ class BotonFlotante extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 176, 121, 39),
         elevation: 0,
         highlightElevation: 0,
-        child: Icon(Icons.accessibility_new),
+        child: Icon(Icons.warning_amber),
         onPressed: () {
           Navigator.push(
               context,
