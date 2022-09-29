@@ -26,7 +26,7 @@ class _AppPageState extends State<AppPage> {
         children: [
           const UserForm(),
           const APageScreen(page: "Aquí viene un mapa"),
-          ViewPanic(),
+          const PanicPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
