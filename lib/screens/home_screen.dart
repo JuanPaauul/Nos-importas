@@ -1,72 +1,104 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
-import 'package:nos_importas/screens/user_form_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int currentPage = 1;
-  final pageController = PageController(initialPage: 1);
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Hola mundo"),
-        elevation: 0,
-      ),
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const UserForm(),
-          const SignUpPage(),
-          const LoginPage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentPage,
-        onTap: (index) {
-          currentPage = index;
-          pageController.animateToPage(currentPage,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut);
-          setState(() {});
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.verified_user_outlined),
-            label: "User",
+      body: SafeArea(
+        child: Container(
+          // we will give media query height
+          // double.infinity make it big as my parent allows
+          // while MediaQuery make it big as per the screen
+
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+          child: Column(
+            // even space distribution
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  const Text(
+                    "NOS IMPORTAS",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "Por que buscamos la seguridad en nuestra ciudad",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                  /*height: MediaQuery.of(context).size.height / 3,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/welcome.png"))),*/
+                  ),
+              Column(
+                children: <Widget>[
+                  // the login button
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 60,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
+                    // defining the shape
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(50)),
+                    child: const Text(
+                      "Inicia Sesión",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                    ),
+                  ),
+                  // creating the signup button
+                  const SizedBox(height: 20),
+                  MaterialButton(
+                    minWidth: double.infinity,
+                    height: 60,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpPage()));
+                    },
+                    color: const Color(0xff0095FF),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                    child: const Text(
+                      "Regístrate",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18),
+                    ),
+                  )
+                ],
+              )
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            label: "Sign Up",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.login_outlined),
-            label: "Login",
-          )
-        ],
+        ),
       ),
-    );
-  }
-}
-
-class APageScreen extends StatelessWidget {
-  final int page;
-
-  const APageScreen({super.key, required this.page});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(page.toString()),
     );
   }
 }

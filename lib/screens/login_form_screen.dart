@@ -34,15 +34,17 @@ class LoginPage extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     const Text(
-                      "Login",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      "NOS IMPORTAS",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Text(
-                      "Login to your account",
+                      "Ingresa a tu cuenta",
                       style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                     )
                   ],
@@ -52,7 +54,7 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: <Widget>[
                       inputFile(label: "Email"),
-                      inputFile(label: "Password", obscureText: true)
+                      inputFile(label: "Contraseña", obscureText: true)
                     ],
                   ),
                 ),
@@ -78,7 +80,7 @@ class LoginPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: const Text(
-                        "Login",
+                        "Inicia Sesión",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
@@ -91,9 +93,9 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const <Widget>[
-                    Text("Don't have an account?"),
+                    Text("¿No tienes una cuenta?"),
                     Text(
-                      " Sign up",
+                      " Regístrate",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
