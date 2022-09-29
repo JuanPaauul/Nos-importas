@@ -3,21 +3,21 @@ import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class AppPage extends StatefulWidget {
+  const AppPage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<AppPage> createState() => _AppPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AppPageState extends State<AppPage> {
   int currentPage = 1;
   final pageController = PageController(initialPage: 1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hola mundo"),
+        title: const Text("NOS IMPORTAS"),
         elevation: 0,
       ),
       body: PageView(
@@ -26,8 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           const UserForm(),
-          const SignUpPage(),
-          const LoginPage(),
+          const APageScreen(page: "Aquí viene un mapa"),
+          const APageScreen(page: "Aquí viene un botón de pánico"),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -42,15 +42,18 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.verified_user_outlined),
-            label: "User",
+            activeIcon: Icon(Icons.verified_user_rounded),
+            label: "Usuario",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            label: "Sign Up",
+            icon: Icon(Icons.map_outlined),
+            activeIcon: Icon(Icons.map_rounded),
+            label: "Mapa",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.login_outlined),
-            label: "Login",
+            icon: Icon(Icons.dangerous_outlined),
+            activeIcon: Icon(Icons.dangerous_rounded),
+            label: "Peligro",
           )
         ],
       ),
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class APageScreen extends StatelessWidget {
-  final int page;
+  final String page;
 
   const APageScreen({super.key, required this.page});
 
