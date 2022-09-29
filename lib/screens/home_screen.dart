@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 
@@ -25,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           const UserForm(),
-          SignUpPage(),
+          const SignUpPage(),
+          const LoginPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,6 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.app_registration),
             label: "Sign Up",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.login_outlined),
+            label: "Login",
           )
         ],
       ),
