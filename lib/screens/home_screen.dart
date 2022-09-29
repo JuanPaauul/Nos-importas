@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
-import 'package:nos_importas/screens/user_form.dart';
+import 'package:nos_importas/screens/user_form_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,8 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          UserForm(),
-          SignUpPage(),
+          const UserForm(),
+          const SignUpPage(),
+          const LoginPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -45,6 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.app_registration),
             label: "Sign Up",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.login_outlined),
+            label: "Login",
           )
         ],
       ),
