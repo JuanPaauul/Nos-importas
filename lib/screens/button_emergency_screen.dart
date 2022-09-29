@@ -8,12 +8,13 @@ Future<ReqResRespuesta> getUsuarios() async {
   return reqResRespuestaFromJson(resp.body);
 }
 
-class ViewPanic extends StatefulWidget {
+class PanicPage extends StatefulWidget {
+  const PanicPage({super.key});
   @override
-  State<ViewPanic> createState() => _MiPagina1State();
+  State<PanicPage> createState() => _MiPagina1State();
 }
 
-class _MiPagina1State extends State<ViewPanic> {
+class _MiPagina1State extends State<PanicPage> {
   int currentPage = 0;
 
   @override
@@ -29,16 +30,17 @@ class _MiPagina1State extends State<ViewPanic> {
             children: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-                  textStyle: TextStyle(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                  textStyle: const TextStyle(
                     color: Colors.blueGrey,
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: Text(
-                  '! BOTON DE PANICO !',
+                child: const Text(
+                  '! BOTÓN DE PÁNICO !',
                   style: TextStyle(
                       color: Colors.red,
                       fontSize: 35.0,
@@ -52,7 +54,7 @@ class _MiPagina1State extends State<ViewPanic> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: BotonFlotante(),
+        floatingActionButton: const BotonFlotante(),
         bottomNavigationBar: BarraNavegacion(),
       ),
     );
@@ -62,38 +64,39 @@ class _MiPagina1State extends State<ViewPanic> {
 class CustomScreen extends StatelessWidget {
   final Color color;
 
-  const CustomScreen({required this.color});
+  const CustomScreen({super.key, required this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Center(
-        child: Text('BOTON DE EMERGENCIA'),
+      child: const Center(
+        child: Text('BOTÓN DE EMERGENCIA'),
       ),
     );
   }
 }
 
-class MiPagina2 extends StatelessWidget {
+class PanicPageSetting extends StatelessWidget {
+  const PanicPageSetting({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contactos'),
+        title: const Text('Contactos'),
       ),
       body: FutureBuilder(
         future: getUsuarios(),
         builder:
             (BuildContext context, AsyncSnapshot<ReqResRespuesta> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else {
             return _ListaUsuarios(snapshot.data!.data);
           }
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: BotonFlotante(),
+      floatingActionButton: const BotonFlotante(),
       bottomNavigationBar: BarraNavegacion(),
     );
   }
@@ -102,7 +105,7 @@ class MiPagina2 extends StatelessWidget {
 class _ListaUsuarios extends StatelessWidget {
   final List<Usuario> usuarios;
 
-  _ListaUsuarios(this.usuarios);
+  const _ListaUsuarios(this.usuarios);
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +129,8 @@ class _ListaUsuarios extends StatelessWidget {
 class BarraNavegacion extends StatelessWidget {
   int currentPage = 0;
 
+  BarraNavegacion({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -139,27 +144,29 @@ class BarraNavegacion extends StatelessWidget {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(0.6),
         items: [
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(Icons.camera_alt_outlined), label: ('Camara')),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
               icon: Icon(Icons.security_sharp), label: ('Ajustes'))
         ]);
   }
 }
 
 class BotonFlotante extends StatelessWidget {
+  const BotonFlotante({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 176, 121, 39),
+        backgroundColor: const Color.fromARGB(255, 176, 121, 39),
         elevation: 0,
         highlightElevation: 0,
-        child: Icon(Icons.warning_amber),
+        child: const Icon(Icons.warning_amber),
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => MiPagina2()));
+                  builder: (BuildContext context) => const PanicPageSetting()));
         });
   }
 }
