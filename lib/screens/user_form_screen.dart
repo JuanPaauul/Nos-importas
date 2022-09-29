@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UserForm extends StatefulWidget {
-  const UserForm({Key? key});
+  const UserForm({super.key});
 
   @override
   _UserFormState createState() => _UserFormState();
@@ -17,16 +17,16 @@ class _UserFormState extends State<UserForm> {
         const SizedBox(
           height: 20,
         ),
-        _FormName(),
-        SizedBox(
+        formName(),
+        const SizedBox(
           height: 10,
         ),
-        _FormGmail()
+        formGmail()
       ],
     );
   }
 
-  Container _FormName() {
+  Container formName() {
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
@@ -39,7 +39,7 @@ class _UserFormState extends State<UserForm> {
         ));
   }
 
-  Container _FormGmail() {
+  Container formGmail() {
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
