@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
-import 'package:nos_importas/screens/user_form.dart';
+import 'package:nos_importas/screens/user_form_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          UserForm(),
+          const UserForm(),
           SignUpPage(),
         ],
       ),
