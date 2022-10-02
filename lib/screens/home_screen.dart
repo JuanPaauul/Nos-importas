@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
+class _HomePageState extends State<HomePage> {
+  GoogleSignInAccount? _currentUser;
+
+  @override
+  void initState() {
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      setState(() {
+        _currentUser = account;
+      });
+    });
+    _googleSignIn.signInSilently();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +65,9 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               Container(
-                  /*height: MediaQuery.of(context).size.height / 3,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/welcome.png"))),*/
-                  ),
+                alignment: Alignment.center,
+                child: _buildWidget(),
+              ),
               Column(
                 children: <Widget>[
                   // the login button
@@ -100,5 +119,73 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildWidget() {
+    GoogleSignInAccount? user = _currentUser;
+    if (user != null) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(2, 12, 2, 12),
+        child: Column(
+          children: [
+            ListTile(
+              leading: GoogleUserCircleAvatar(identity: user),
+              title: Text(
+                user.displayName ?? '',
+                style: TextStyle(fontSize: 22),
+              ),
+              subtitle: Text(user.email, style: TextStyle(fontSize: 22)),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Signed in successfully',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(onPressed: signOut, child: const Text('Sign out'))
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'You are not signed in',
+              style: TextStyle(fontSize: 30),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+                onPressed: signIn,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Sign in', style: TextStyle(fontSize: 30)),
+                )),
+          ],
+        ),
+      );
+    }
+  }
+
+  Future<void> signIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (e) {
+      print('Error signing in $e');
+    }
+  }
+
+  void signOut() {
+    _googleSignIn.disconnect();
   }
 }
