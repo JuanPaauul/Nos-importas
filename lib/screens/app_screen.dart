@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
-import 'package:nos_importas/screens/user_form_screen.dart';
+import 'package:nos_importas/screens/user_confidence_list.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:nos_importas/screens/camera_function.dart';
 
@@ -26,7 +26,8 @@ class _AppPageState extends State<AppPage> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const UserForm(),
+          //const UserForm(), //Aqui debe ir la lista de usuarios de confianza ya no el formulario
+          const UserList(),
           const MapsPage(),
           const PanicPage(),
           Imagen(),
