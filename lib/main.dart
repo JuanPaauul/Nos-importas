@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nos_importas/provider/google_sign_in.dart';
 import 'package:nos_importas/screens/home_screen.dart';
+import 'package:nos_importas/screens/route/pages.dart';
+
+import 'screens/route/routes.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -18,15 +21,10 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: title,
-          theme: ThemeData.dark().copyWith(
-              colorScheme:
-                  ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
-          home: HomePage(),
-        ),
-      );
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'NOS IMPORTAS',
+        home: HomePage());
+  }
 }
