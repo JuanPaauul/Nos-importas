@@ -72,7 +72,101 @@ class _MiPagina1State extends State<PanicPage> {
 }
 
 // manda un GMAIL \\
-void EmergencyButton() {}
+void EmergencyButton() {
+  runApp(const ContactPage());
+}
+
+class ContactPage extends StatefulWidget {
+  const ContactPage({Key? key}) : super(key: key);
+
+  @override
+  _ContactPageState createState() => _ContactPageState();
+}
+
+final nameController = TextEditingController();
+final subjectController = TextEditingController();
+final emailController = TextEditingController();
+final messageController = TextEditingController();
+
+// LINK: https://www.emailjs.com/ \\
+Future sendEmail() async {
+  final url = Uri.parse("");
+}
+
+class _ContactPageState extends State<ContactPage> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Contact Form"),
+          backgroundColor: Colors.brown,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(25.0, 40, 25, 0),
+          child: Form(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.account_circle),
+                    hintText: 'Name',
+                    labelText: 'Name',
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                TextFormField(
+                  controller: subjectController,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.subject_rounded),
+                    hintText: 'Subject',
+                    labelText: 'Subject',
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.email),
+                    hintText: 'Email',
+                    labelText: 'Email',
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                TextFormField(
+                  controller: messageController,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.message),
+                    hintText: 'Message',
+                    labelText: 'Message',
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Send",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class CustomScreen extends StatelessWidget {
   final Color color;
