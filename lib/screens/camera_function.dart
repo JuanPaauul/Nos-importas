@@ -9,16 +9,28 @@ class _ImagenState extends State<Imagen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cámara con Flutter.'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text('EMERGENCIA'),
-          onPressed: _optionsDialogBox,
+        appBar: AppBar(
+          title: Text('Cámara'),
         ),
-      ),
-    );
+        body: Center(
+            child: ElevatedButton.icon(
+          onPressed: _optionsDialogBox,
+          style: TextButton.styleFrom(
+              primary: Colors.redAccent, backgroundColor: Colors.red),
+          label: Text(
+            'EMERGENCIA',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 60,
+                fontStyle: FontStyle.italic,
+                color: Colors.black),
+          ),
+          icon: Icon(
+            Icons.warning,
+            size: 100,
+            color: Colors.yellowAccent,
+          ),
+        )));
   }
 
   void _openCamera() {

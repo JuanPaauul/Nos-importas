@@ -27,21 +27,34 @@ class _MiPagina1State extends State<PanicPage> {
             children: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-                  textStyle: const TextStyle(
-                    color: Colors.blueGrey,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 100, vertical: 50),
+                    textStyle: const TextStyle(
+                      color: Colors.blueGrey,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    primary: Colors.red,
+                    backgroundColor: Colors.red),
+                child: ElevatedButton.icon(
+                  onPressed: EmergencyButton,
+                  style: TextButton.styleFrom(
+                      primary: Colors.redAccent,
+                      backgroundColor: Colors.yellow),
+                  label: Text(
+                    'EMERGENCIA',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                  icon: Icon(
+                    Icons.warning,
+                    size: 70,
+                    color: Colors.black,
                   ),
-                ),
-                child: const Text(
-                  '! BOTÓN DE PÁNICO !',
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 35.0,
-                      fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
                   setState(() {});
@@ -57,6 +70,9 @@ class _MiPagina1State extends State<PanicPage> {
     );
   }
 }
+
+// manda un GMAIL \\
+void EmergencyButton() {}
 
 class CustomScreen extends StatelessWidget {
   final Color color;
@@ -139,10 +155,10 @@ class BarraNavegacion extends StatelessWidget {
         },
         backgroundColor: Colors.pink,
         selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(0.6),
+        unselectedItemColor: Colors.white.withOpacity(1.0),
         items: [
           const BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt_outlined), label: ('Camara')),
+              icon: Icon(Icons.gps_fixed), label: ('Gps')),
           const BottomNavigationBarItem(
               icon: Icon(Icons.security_sharp), label: ('Ajustes'))
         ]);
@@ -158,7 +174,7 @@ class BotonFlotante extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 176, 121, 39),
         elevation: 0,
         highlightElevation: 0,
-        child: const Icon(Icons.warning_amber),
+        child: const Icon(Icons.person_add),
         onPressed: () {
           Navigator.push(
               context,
