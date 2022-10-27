@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
+import 'package:nos_importas/screens/camera_function.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -28,6 +29,7 @@ class _AppPageState extends State<AppPage> {
           const UserForm(),
           const MapsPage(),
           const PanicPage(),
+          Imagen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -54,6 +56,11 @@ class _AppPageState extends State<AppPage> {
             icon: Icon(Icons.dangerous_outlined),
             activeIcon: Icon(Icons.dangerous_rounded),
             label: "Boton de panico",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt_outlined),
+            activeIcon: Icon(Icons.camera_alt_rounded),
+            label: "Camara",
           ),
         ],
       ),
