@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nos_importas/screens/login_form_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
@@ -44,18 +47,10 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  const Text(
-                    "NOS IMPORTAS",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  new Image(
+                      image: new AssetImage('assets/Nos_importas_logo.png')),
                   Text(
-                    "Por que buscamos la seguridad en nuestra ciudad",
+                    "Por favor, inicia sesion con Google",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],
@@ -68,52 +63,6 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.center,
                 child: _buildWidget(),
               ),
-              Column(
-                children: <Widget>[
-                  // the login button
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()));
-                    },
-                    // defining the shape
-                    shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Colors.black),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: const Text(
-                      "Inicia Sesión",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                    ),
-                  ),
-                  // creating the signup button
-                  const SizedBox(height: 20),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()));
-                    },
-                    color: const Color(0xff0095FF),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                    child: const Text(
-                      "Regístrate",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18),
-                    ),
-                  )
-                ],
-              )
             ],
           ),
         ),
@@ -155,22 +104,23 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'You are not signed in',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
+            //Aca añadimos mas metodos de inicio de sesion si lo llegamos a necesitar
+            ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                  primary: Colors.red,
+                  onPrimary: Colors.black,
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                icon: const FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.white,
+                ),
                 onPressed: signIn,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Sign in', style: TextStyle(fontSize: 30)),
-                )),
+                label: const Text('Iniciar sesion con Google',
+                    style: TextStyle(color: Colors.white)))
           ],
         ),
       );
