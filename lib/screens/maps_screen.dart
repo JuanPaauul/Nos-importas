@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nos_importas/functions/input_file.dart';
-import 'package:nos_importas/screens/app_screen.dart';
 
 final _initialCameraPosition = CameraPosition(
   target: LatLng(-17.3793081, -66.1534358),
