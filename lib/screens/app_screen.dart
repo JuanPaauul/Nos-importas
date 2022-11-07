@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
@@ -11,15 +12,41 @@ class AppPage extends StatefulWidget {
   State<AppPage> createState() => _AppPageState();
 }
 
+enum options { A }
+
 class _AppPageState extends State<AppPage> {
   int currentPage = 1;
   final pageController = PageController(initialPage: 1);
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: PopupMenuButton(
+          itemBuilder: (context) {
+            return <PopupMenuEntry<options>>[
+              new PopupMenuItem(
+                  child: new Text("Here will come more options!")),
+            ];
+          },
+        ),
         title: const Text("NOS IMPORTAS"),
+        centerTitle: true,
         elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              print(user.email!);
+              print(user.displayName!);
+              print(user.phoneNumber!);
+              print(user.uid!);
+            },
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(user.photoURL!),
+              child: GestureDetector(),
+            ),
+          ),
+        ],
       ),
       body: PageView(
         controller: pageController,
@@ -64,19 +91,6 @@ class _AppPageState extends State<AppPage> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class APageScreen extends StatelessWidget {
-  final String page;
-
-  const APageScreen({super.key, required this.page});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(page.toString()),
     );
   }
 }
