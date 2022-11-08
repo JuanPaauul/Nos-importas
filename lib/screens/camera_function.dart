@@ -6,6 +6,8 @@ class Imagen extends StatefulWidget {
 }
 
 class _ImagenState extends State<Imagen> {
+  List<PickedFile> images = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +41,16 @@ class _ImagenState extends State<Imagen> {
     final picture = picker.getImage(
       source: ImageSource.camera,
     );
+    Navigator.pop(context);
+  }
+
+  void _openVideo() {
+    ImagePicker picker = ImagePicker();
+    // ignore: deprecated_member_use
+    final picture = picker.getVideo(
+      source: ImageSource.camera,
+    );
+    Navigator.pop(context);
   }
 
   void _openGallery() {
@@ -47,6 +59,7 @@ class _ImagenState extends State<Imagen> {
     final picture = picker.getImage(
       source: ImageSource.gallery,
     );
+    Navigator.pop(context);
   }
 
   Future<void> _optionsDialogBox() {
@@ -62,7 +75,14 @@ class _ImagenState extends State<Imagen> {
                     onTap: _openCamera,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(20.0),
+                  ),
+                  GestureDetector(
+                    child: Text('Tomar video'),
+                    onTap: _openVideo,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
                   ),
                   GestureDetector(
                     child: Text('Seleccionar de galeria'),
