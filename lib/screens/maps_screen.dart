@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+<<<<<<< HEAD
+=======
+/*import 'package:nos_importas/functions/input_file.dart';
+import 'package:nos_importas/screens/app_screen.dart';*/
+>>>>>>> 6bb846b (Last change)
 import 'package:nos_importas/screens/maps_controller.dart';
 
 class MapsPage extends StatefulWidget {
@@ -16,8 +21,8 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
-        markers: _controller.markers,
-        onMapCreated: _controller.onMapCreated,
+        //markers: _controller.markers,
+        //onMapCreated: _controller.onMapCreated,
         initialCameraPosition: _controller.initialCameraPosition,
         myLocationButtonEnabled: true,
         myLocationEnabled: true,

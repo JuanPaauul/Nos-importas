@@ -7,6 +7,8 @@ import 'package:nos_importas/screens/request_permission/request_permission_contr
 import 'package:nos_importas/screens/route/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../app_screen.dart';
+
 class RequestPermissionPage extends StatefulWidget {
   const RequestPermissionPage({super.key});
 
@@ -23,7 +25,9 @@ class _RequestPermissionPageState extends State<RequestPermissionPage> {
     _subscription = _controller.onStatusChanged.listen((status) {
       if (status == PermissionStatus.granted) {
         //NavigationBar.pushRemplacementNamed;
-        Navigator.pushReplacementNamed(context, Routes.MAPS);
+        //Navigator.pushReplacementNamed(context, Routes.VIEWS);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const AppPage()));
       }
     });
   }
