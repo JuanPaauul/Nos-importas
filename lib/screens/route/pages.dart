@@ -9,7 +9,7 @@ import 'package:nos_importas/screens/screen_redirect.dart';
 
 Map<String, Widget Function(BuildContext)> appRoutes() {
   return {
-    Routes.SPLASH: (_) => const HomePage(),
+    Routes.SPLASH: (_) => HomePage(),
     Routes.VIEWS: (_) => const AppPage(),
     Routes.MAPS: (_) => const MapsPage(),
     Routes.PERMISSIONS: (_) => const RequestPermissionPage(),
