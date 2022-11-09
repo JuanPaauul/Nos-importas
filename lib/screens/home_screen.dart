@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/app_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 import '../widget/sign_up_widget.dart';
+import 'package:nos_importas/screens/camera_function.dart';
 
 class HomePage extends StatelessWidget {
   @override
