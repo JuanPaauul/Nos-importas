@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
+import 'package:nos_importas/screens/screen_controller.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
 
 class AppPage extends StatefulWidget {
@@ -15,6 +17,21 @@ class AppPage extends StatefulWidget {
 enum options { A }
 
 class _AppPageState extends State<AppPage> {
+  //final _controller = ScreenController(Permission.locationAlways);
+  //final _controller = ScreenController(Permission.locationWhenInUse);
+  @override
+  void initState() {
+    super.initState();
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.checkPermission();
+    });
+    _controller.addListener(() {
+      if (_controller.routeName != null) {
+        Navigator.pushReplacementNamed(context, _controller.routeName!);
+      }
+    });*/
+  }
+
   int currentPage = 1;
   final pageController = PageController(initialPage: 1);
   final user = FirebaseAuth.instance.currentUser!;
