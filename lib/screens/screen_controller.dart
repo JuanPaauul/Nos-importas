@@ -10,7 +10,7 @@ class ScreenController extends ChangeNotifier {
 
   Future<void> checkPermission() async {
     final isGranted = await _locationPermisiion.isGranted;
-    _routeName = isGranted ? Routes.MAPS : Routes.PERMISSIONS;
+    _routeName = isGranted ? Routes.VIEWS : Routes.PERMISSIONS;
     notifyListeners();
   }
 }
