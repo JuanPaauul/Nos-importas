@@ -25,9 +25,9 @@ class _RequestPermissionPageState extends State<RequestPermissionPage> {
     _subscription = _controller.onStatusChanged.listen((status) {
       if (status == PermissionStatus.granted) {
         //NavigationBar.pushRemplacementNamed;
-        //Navigator.pushReplacementNamed(context, Routes.VIEWS);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const AppPage()));
+        Navigator.pushReplacementNamed(context, Routes.VIEWS);
+        /*avigator.push(
+            context, MaterialPageRoute(builder: (context) => const AppPage()));*/
       }
     });
   }

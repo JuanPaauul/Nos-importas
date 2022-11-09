@@ -18,18 +18,18 @@ enum options { A }
 
 class _AppPageState extends State<AppPage> {
   //final _controller = ScreenController(Permission.locationAlways);
-  final _controller = ScreenController(Permission.locationWhenInUse);
+  //final _controller = ScreenController(Permission.locationWhenInUse);
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.checkPermission();
     });
     _controller.addListener(() {
       if (_controller.routeName != null) {
         Navigator.pushReplacementNamed(context, _controller.routeName!);
       }
-    });
+    });*/
   }
 
   int currentPage = 1;
