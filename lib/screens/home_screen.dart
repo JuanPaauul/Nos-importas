@@ -2,11 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/app_screen.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
-<<<<<<< HEAD
+
 import '../widget/sign_up_widget.dart';
 import 'package:nos_importas/screens/camera_function.dart';
-=======
->>>>>>> 667444b (Corriendo permisos)
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

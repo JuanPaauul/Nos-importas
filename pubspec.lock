@@ -366,15 +366,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
-<<<<<<< HEAD
-  photo_view:
-    dependency: "direct main"
-    description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.3"
-=======
   permission_handler:
     dependency: "direct main"
     description:
@@ -410,7 +401,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
->>>>>>> ced254c (Se agrego la obtencion de la ubicacion)
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.3"
   plugin_platform_interface:
     dependency: transitive
     description:
