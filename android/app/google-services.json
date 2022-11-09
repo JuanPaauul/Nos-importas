@@ -14,41 +14,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "565372838119-4439i7lgt2j3qjm8puuv7c9u8b9pg3tf.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDCMxITadIwWQw6t1gSX7pndH1z-CAqxIs"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "565372838119-4439i7lgt2j3qjm8puuv7c9u8b9pg3tf.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "565372838119-plkgfsbimigame216db7vpd3uslvqh66.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.nosimportas"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:565372838119:android:4150234c9b220a1fbdc242",
-        "android_client_info": {
-          "package_name": "com.example.nosimportas"
-        }
-      },
-      "oauth_client": [
+          "client_id": "565372838119-56tpts7dhv5omonmk4f0ijphtq1u3p72.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nos_importas",
+            "certificate_hash": "ccde3068cd1a0a7718bf9bb11707b96e996f2f9a"
+          }
+        },
         {
           "client_id": "565372838119-4439i7lgt2j3qjm8puuv7c9u8b9pg3tf.apps.googleusercontent.com",
           "client_type": 3
