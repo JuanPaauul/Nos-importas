@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/app_screen.dart';
+import 'package:nos_importas/screens/screen_redirect.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 
 import '../widget/sign_up_widget.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
-              return const AppPage();
+              return const FirstView();
             } else if (snapshot.hasError) {
               return const Center(child: Text('Hubo un error!'));
             } else {
