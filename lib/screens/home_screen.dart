@@ -5,6 +5,7 @@ import 'package:nos_importas/screens/sign_up_screen.dart';
 
 import '../widget/sign_up_widget.dart';
 import 'package:nos_importas/screens/camera_function.dart';
+import 'package:nos_importas/screens/send_mail.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,7 +22,8 @@ class HomePage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Center(child: Text('Hubo un error!'));
             } else {
-              return const SignUpPage();
+              //return const SignUpPage();
+              return SendMailFromLocalHost();
             }
           },
         ),

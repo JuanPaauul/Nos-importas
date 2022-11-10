@@ -6,6 +6,7 @@ import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
+import 'package:nos_importas/screens/send_mail.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -74,6 +75,7 @@ class _AppPageState extends State<AppPage> {
           const MapsPage(),
           const PanicPage(),
           Imagen(),
+          SendMailFromLocalHost(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -105,6 +107,11 @@ class _AppPageState extends State<AppPage> {
             icon: Icon(Icons.camera_alt_outlined),
             activeIcon: Icon(Icons.camera_alt_rounded),
             label: "Camara",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.email_outlined),
+            activeIcon: Icon(Icons.email_rounded),
+            label: "Correo",
           ),
         ],
       ),
