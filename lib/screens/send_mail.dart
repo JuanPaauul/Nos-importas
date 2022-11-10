@@ -1,5 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, deprecated_member_use
+// ignore_for_file: non_constant_identifier_names, deprecated_member_use, unused_import, library_private_types_in_public_api, prefer_interpolation_to_compose_strings
 
+import 'dart:io';
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -7,11 +9,14 @@ import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:toast/toast.dart';
 
 class SendMailFromLocalHost extends StatefulWidget {
+  const SendMailFromLocalHost({super.key});
+
   @override
   _SendMailFromLocalHostState createState() => _SendMailFromLocalHostState();
 }
 
-class _SendMailFromLocalHostState extends State<SendMailFromLocalHost> {
+class _SendMailFromLocalHostState extends State<SendMailFromLocalHost>
+    with SingleTickerProviderStateMixin {
   SendMail() async {
     String username = "ciudadcochabamba1@gmail.com";
     String password = "nosimportas2022";
@@ -50,21 +55,34 @@ class _SendMailFromLocalHostState extends State<SendMailFromLocalHost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(' Correo Electronico '),
+        title: const Text(' Correo Electronico '),
       ),
       body: Center(
-        child: MaterialButton(
-          color: Colors.purple,
-          child: Text('Enviar Correo', style: TextStyle(color: Colors.white)),
+        child: ElevatedButton.icon(
           onPressed: () {
             sendEmail();
           },
+          style: TextButton.styleFrom(
+              foregroundColor: Colors.purple, backgroundColor: Colors.purple),
+          label: const Text(
+            "Enviar Correo",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+                fontStyle: FontStyle.italic,
+                color: Colors.white),
+          ),
+          icon: const Icon(
+            Icons.send,
+            size: 40,
+            color: Colors.black,
+          ),
         ),
       ),
     );
   }
 
-  showToast(String msg, {required int duration, required int gravity}) {
+  showToast(String msg, {int? duration, int? gravity}) {
     Toast.show(msg, textStyle: context, duration: duration, gravity: gravity);
   }
 }
