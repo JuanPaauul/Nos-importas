@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-final _initialCameraPosition = CameraPosition(
-  target: LatLng(-17.3793081, -66.1534358),
-  zoom: 3,
-);
+/*import 'package:nos_importas/functions/input_file.dart';
+import 'package:nos_importas/screens/app_screen.dart';*/
 
-class MapsPage extends StatelessWidget {
-  const MapsPage({super.key});
+import 'package:nos_importas/screens/maps_controller.dart';
+
+class MapsPage extends StatefulWidget {
+  const MapsPage({Key? key}) : super(key: key);
+
+  @override
+  _MapsPageState createState() => _MapsPageState();
+}
+
+class _MapsPageState extends State<MapsPage> {
+  final _controller = MapsController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 20,
-            color: Colors.black,
-          ),
-        ),
+      body: GoogleMap(
+        //markers: _controller.markers,
+        //onMapCreated: _controller.onMapCreated,
+        initialCameraPosition: _controller.initialCameraPosition,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        //onTap: (position) { print(position); },
+        //onTap: _controller.onTap,
       ),
-      body: GoogleMap(initialCameraPosition: _initialCameraPosition),
     );
   }
 }

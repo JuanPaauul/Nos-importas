@@ -2,9 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
+import 'package:nos_importas/screens/screen_controller.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
+import 'package:nos_importas/screens/send_mail.dart';
 
 class AppPage extends StatefulWidget {
   const AppPage({super.key});
@@ -16,6 +19,21 @@ class AppPage extends StatefulWidget {
 enum options { A }
 
 class _AppPageState extends State<AppPage> {
+  //final _controller = ScreenController(Permission.locationAlways);
+  //final _controller = ScreenController(Permission.locationWhenInUse);
+  @override
+  void initState() {
+    super.initState();
+    /*WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.checkPermission();
+    });
+    _controller.addListener(() {
+      if (_controller.routeName != null) {
+        Navigator.pushReplacementNamed(context, _controller.routeName!);
+      }
+    });*/
+  }
+
   int currentPage = 1;
   final pageController = PageController(initialPage: 1);
   final user = FirebaseAuth.instance.currentUser!;
@@ -56,6 +74,7 @@ class _AppPageState extends State<AppPage> {
           const MapsPage(),
           const PanicPage(),
           Imagen(),
+          SendMailFromLocalHost(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -87,6 +106,11 @@ class _AppPageState extends State<AppPage> {
             icon: Icon(Icons.camera_alt_outlined),
             activeIcon: Icon(Icons.camera_alt_rounded),
             label: "Camara",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.email_outlined),
+            activeIcon: Icon(Icons.email_rounded),
+            label: "Correo",
           ),
         ],
       ),

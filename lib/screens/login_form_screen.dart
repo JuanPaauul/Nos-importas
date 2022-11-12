@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/functions/input_file.dart';
-import 'package:nos_importas/screens/app_screen.dart';
+import 'package:nos_importas/screens/screen_redirect.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -76,10 +76,10 @@ class LoginPage extends StatelessWidget {
                       minWidth: double.infinity,
                       height: 60,
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const AppPage()));
+                                builder: (context) => const FirstView()));
                       },
                       color: const Color(0xff0095FF),
                       elevation: 0,
