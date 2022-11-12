@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps_screen.dart';
+import 'package:nos_importas/screens/profile_screen.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:nos_importas/screens/camera_function.dart';
@@ -36,10 +37,8 @@ class _AppPageState extends State<AppPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              print(user.email!);
-              print(user.displayName!);
-              print(user.phoneNumber!);
-              print(user.uid!);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(user.photoURL!),
