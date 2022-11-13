@@ -4,6 +4,7 @@ import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
 import 'package:nos_importas/screens/screen_controller.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
+import 'package:nos_importas/screens/show_trust_users.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
@@ -70,7 +71,7 @@ class _AppPageState extends State<AppPage> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const UserForm(),
+          const ShowTrustUsersForm(),
           const MapsPage(),
           const PanicPage(),
           Imagen(),
@@ -79,8 +80,11 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
+        selectedItemColor: Color.fromRGBO(53, 167, 219, 1),
+        unselectedItemColor: Color.fromRGBO(185, 223, 242, 1),
         onTap: (index) {
           currentPage = index;
+          print(currentPage);
           pageController.animateToPage(currentPage,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut);
