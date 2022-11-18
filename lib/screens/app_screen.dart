@@ -44,8 +44,7 @@ class _AppPageState extends State<AppPage> {
         leading: PopupMenuButton(
           itemBuilder: (context) {
             return <PopupMenuEntry<options>>[
-              new PopupMenuItem(
-                  child: new Text("Here will come more options!")),
+              PopupMenuItem(child: Text("Agrega Poligonos")),
             ];
           },
         ),

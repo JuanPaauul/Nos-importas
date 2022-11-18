@@ -59,7 +59,7 @@ class MapsController extends ChangeNotifier {
       polyline = Polyline(
           polylineId: polylineId,
           points: [position],
-          width: 2,
+          width: 3,
           color: Colors.green);
     }
     _polylines[polylineId] = polyline;
