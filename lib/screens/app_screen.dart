@@ -45,8 +45,7 @@ class _AppPageState extends State<AppPage> {
         leading: PopupMenuButton(
           itemBuilder: (context) {
             return <PopupMenuEntry<options>>[
-              new PopupMenuItem(
-                  child: new Text("Here will come more options!")),
+              const PopupMenuItem(child: Text("Here will come more options!")),
             ];
           },
         ),
@@ -56,8 +55,10 @@ class _AppPageState extends State<AppPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()));
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(user.photoURL!),
@@ -80,11 +81,10 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
-        selectedItemColor: Color.fromRGBO(53, 167, 219, 1),
-        unselectedItemColor: Color.fromRGBO(185, 223, 242, 1),
+        selectedItemColor: const Color.fromRGBO(53, 167, 219, 1),
+        unselectedItemColor: const Color.fromRGBO(185, 223, 242, 1),
         onTap: (index) {
           currentPage = index;
-          print(currentPage);
           pageController.animateToPage(currentPage,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut);
@@ -92,8 +92,8 @@ class _AppPageState extends State<AppPage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.verified_user_outlined),
-            activeIcon: Icon(Icons.verified_user_rounded),
+            icon: Icon(Icons.admin_panel_settings),
+            activeIcon: Icon(Icons.admin_panel_settings),
             label: "Usuarios de confianza",
           ),
           BottomNavigationBarItem(

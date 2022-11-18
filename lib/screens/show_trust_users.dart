@@ -16,18 +16,30 @@ class _ShowTrustUserState extends State<ShowTrustUsersForm> {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          const SizedBox(
-            height: 20,
-          ),
           const TrustUserListWidget(),
-          ElevatedButton(
-              onPressed: (() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const UserFormWidget()));
-              }),
-              child: const Text("Añadir usuario de confianza"))
+          const Spacer(),
+          Row(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              const Spacer(),
+              SizedBox(
+                height: 45.0,
+                width: 45.0,
+                child: FloatingActionButton(
+                    onPressed: (() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UserFormWidget()));
+                    }),
+                    backgroundColor: const Color.fromARGB(255, 101, 183, 221),
+                    elevation: 5.0,
+                    child: const Icon(Icons.add)),
+              )
+            ],
+          )
         ],
       ),
     );
