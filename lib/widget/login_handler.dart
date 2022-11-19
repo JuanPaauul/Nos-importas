@@ -43,6 +43,6 @@ class LoginHandler extends StatelessWidget {
     if (hasData) {
       return const AppPage();
     }
-    return const Scaffold();
+    return const AppPage();
   }
 }
