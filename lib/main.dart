@@ -25,11 +25,10 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: title,
-          theme: ThemeData.dark().copyWith(
-              colorScheme:
-                  ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
-          initialRoute: Routes.SPLASH,
-          routes: appRoutes(),
+          //theme: ThemeData.dark().copyWith(
+          //    colorScheme:
+          //        ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
+          home: HomePage(),
         ),
       );
 }

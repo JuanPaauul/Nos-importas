@@ -4,6 +4,7 @@ import 'package:nos_importas/screens/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
 import 'package:nos_importas/screens/screen_controller.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
+import 'package:nos_importas/screens/show_trust_users.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
@@ -44,8 +45,7 @@ class _AppPageState extends State<AppPage> {
         leading: PopupMenuButton(
           itemBuilder: (context) {
             return <PopupMenuEntry<options>>[
-              new PopupMenuItem(
-                  child: new Text("Here will come more options!")),
+              const PopupMenuItem(child: Text("Here will come more options!")),
             ];
           },
         ),
@@ -55,8 +55,10 @@ class _AppPageState extends State<AppPage> {
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()));
             },
             child: CircleAvatar(
               backgroundImage: NetworkImage(user.photoURL!),
@@ -70,7 +72,7 @@ class _AppPageState extends State<AppPage> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const UserForm(),
+          const ShowTrustUsersForm(),
           const MapsPage(),
           const PanicPage(),
           Imagen(),
@@ -79,6 +81,8 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
+        selectedItemColor: const Color.fromRGBO(53, 167, 219, 1),
+        unselectedItemColor: const Color.fromRGBO(185, 223, 242, 1),
         onTap: (index) {
           currentPage = index;
           pageController.animateToPage(currentPage,
@@ -88,8 +92,8 @@ class _AppPageState extends State<AppPage> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.verified_user_outlined),
-            activeIcon: Icon(Icons.verified_user_rounded),
+            icon: Icon(Icons.admin_panel_settings),
+            activeIcon: Icon(Icons.admin_panel_settings),
             label: "Usuarios de confianza",
           ),
           BottomNavigationBarItem(
