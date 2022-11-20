@@ -44,9 +44,13 @@ class MapsPage extends StatelessWidget {
                     ),
                     zoom: 15,
                   );
+                  print(controller.initialPosition!.latitude);
+                  print(controller.initialPosition!.longitude);
+                  //controller.newPolygon();
                   return GoogleMap(
                     markers: controller.markers,
-                    polylines: controller.polylines,
+                    //polylines: controller.polylines,
+                    polygons: controller.polygons,
                     //onMapCreated: _controller.onMapCreated,
                     initialCameraPosition: initialCameraPosition,
                     myLocationButtonEnabled: true,
