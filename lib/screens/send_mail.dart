@@ -1,20 +1,7 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/utils.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  final String title = 'Url Launcher';
-
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: title,
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: SendEmail(title: title),
-      );
-}
 
 class SendEmail extends StatefulWidget {
   final String title;
@@ -32,8 +19,7 @@ class _SendEmailState extends State<SendEmail> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
-          //title: const Text(' Correo Electronico '),
+          title: const Text(' Correo Electronico '),
         ),
         body: Center(
           child: Column(
@@ -58,7 +44,7 @@ class _SendEmailState extends State<SendEmail> {
     required VoidCallback onClicked,
   }) =>
       Container(
-        padding: EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         child: ElevatedButton.icon(
           onPressed: onClicked,
           style: TextButton.styleFrom(

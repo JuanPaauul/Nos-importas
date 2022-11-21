@@ -76,7 +76,9 @@ class _AppPageState extends State<AppPage> {
           const MapsPage(),
           const PanicPage(),
           const Imagen(),
-          const SendEmail(title: '',),
+          const SendEmail(
+            title: '',
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
