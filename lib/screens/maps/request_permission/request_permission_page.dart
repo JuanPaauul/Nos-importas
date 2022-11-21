@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:nos_importas/screens/request_permission/request_permission_controller.dart';
+import 'package:nos_importas/screens/maps/request_permission/request_permission_controller.dart';
 import 'package:nos_importas/screens/route/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../app_screen.dart';
+import '../../app_screen.dart';
 
 class RequestPermissionPage extends StatefulWidget {
   const RequestPermissionPage({super.key});

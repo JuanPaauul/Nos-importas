@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 /*import 'package:nos_importas/functions/input_file.dart';
 import 'package:nos_importas/screens/app_screen.dart';*/
 
-import 'package:nos_importas/screens/maps_controller.dart';
+import 'package:nos_importas/screens/maps/maps_controller.dart';
 import 'package:provider/provider.dart';
 
 class MapsPage extends StatelessWidget {
@@ -44,9 +44,13 @@ class MapsPage extends StatelessWidget {
                     ),
                     zoom: 15,
                   );
+                  print(controller.initialPosition!.latitude);
+                  print(controller.initialPosition!.longitude);
+                  //controller.newPolygon();
                   return GoogleMap(
                     markers: controller.markers,
-                    polylines: controller.polylines,
+                    //polylines: controller.polylines,
+                    polygons: controller.polygons,
                     //onMapCreated: _controller.onMapCreated,
                     initialCameraPosition: initialCameraPosition,
                     myLocationButtonEnabled: true,

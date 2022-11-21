@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nos_importas/screens/screen_controller.dart';
+import 'package:nos_importas/screens/maps/screen_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FirstView extends StatefulWidget {
