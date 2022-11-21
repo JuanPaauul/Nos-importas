@@ -75,7 +75,7 @@ class _AppPageState extends State<AppPage> {
           const ShowTrustUsersForm(),
           const MapsPage(),
           const PanicPage(),
-          const Imagen(),
+          const CameraPage(),
           const SendEmail(
             title: '',
           ),

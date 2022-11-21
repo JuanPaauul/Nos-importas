@@ -6,41 +6,38 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nos_importas/screens/camera_screen.dart';
 
-class Imagen extends StatefulWidget {
-  const Imagen({super.key});
+class CameraPage extends StatefulWidget {
+  const CameraPage({super.key});
 
   @override
-  _ImagenState createState() => _ImagenState();
+  _CameraPageState createState() => _CameraPageState();
 }
 
-class _ImagenState extends State<Imagen> {
+class _CameraPageState extends State<CameraPage> {
   List<PickedFile> images = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Cámara'),
-        ),
         body: Center(
             child: ElevatedButton.icon(
-          onPressed: _optionsDialogBox,
-          style: TextButton.styleFrom(
-              foregroundColor: Colors.redAccent, backgroundColor: Colors.red),
-          label: const Text(
-            'EMERGENCIA',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 60,
-                fontStyle: FontStyle.italic,
-                color: Colors.black),
-          ),
-          icon: const Icon(
-            Icons.warning,
-            size: 100,
-            color: Colors.yellowAccent,
-          ),
-        )));
+      onPressed: _optionsDialogBox,
+      style: TextButton.styleFrom(
+          foregroundColor: Colors.redAccent, backgroundColor: Colors.black),
+      label: const Text(
+        'ABRIR',
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 70,
+            fontStyle: FontStyle.italic,
+            color: Colors.white),
+      ),
+      icon: const Icon(
+        Icons.open_in_browser,
+        size: 100,
+        color: Colors.blue,
+      ),
+    )));
   }
 
   void _openCamera() {

@@ -18,9 +18,6 @@ class SendEmail extends StatefulWidget {
 class _SendEmailState extends State<SendEmail> {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text(' Correo Electronico '),
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,13 +50,13 @@ class _SendEmailState extends State<SendEmail> {
             "Enviar Correo",
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 35,
+                fontSize: 45,
                 fontStyle: FontStyle.italic,
                 color: Colors.white),
           ),
           icon: const Icon(
             Icons.send,
-            size: 40,
+            size: 60,
             color: Colors.black,
           ),
         ),

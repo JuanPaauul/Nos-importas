@@ -23,9 +23,6 @@ class _MiPagina1State extends State<PanicPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Boton de Emergencia'),
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +67,6 @@ class _MiPagina1State extends State<PanicPage> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: const BotonFlotante(),
-        bottomNavigationBar: BarraNavegacion(),
       ),
     );
   }
@@ -115,7 +111,6 @@ class PanicPageSetting extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: const BotonFlotante(),
-      bottomNavigationBar: BarraNavegacion(),
     );
   }
 }
@@ -141,33 +136,6 @@ class _ListaUsuarios extends StatelessWidget {
             ),
           );
         });
-  }
-}
-
-class BarraNavegacion extends StatelessWidget {
-  int currentPage = 0;
-
-  BarraNavegacion({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        currentIndex: currentPage,
-        onTap: (index) {
-          currentPage = index;
-
-          //setState(() {});
-        },
-        backgroundColor: Colors.pink,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(1.0),
-        // ignore: prefer_const_literals_to_create_immutables
-        items: [
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.gps_fixed), label: ('Gps')),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.security_sharp), label: ('Ajustes'))
-        ]);
   }
 }
 
