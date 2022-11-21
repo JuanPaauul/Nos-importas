@@ -75,8 +75,8 @@ class _AppPageState extends State<AppPage> {
           const ShowTrustUsersForm(),
           const MapsPage(),
           const PanicPage(),
-          Imagen(),
-          SendMailFromLocalHost(),
+          const Imagen(),
+          const SendEmail(title: '',),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -1,67 +1,66 @@
-// ignore_for_file: non_constant_identifier_names, deprecated_member_use, unused_import, library_private_types_in_public_api, prefer_interpolation_to_compose_strings
-
-import 'dart:io';
-import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/mailer.dart';
-import 'package:mailer/smtp_server/gmail.dart';
-import 'package:nos_importas/screens/button_emergency_screen.dart';
-import 'package:toast/toast.dart';
+import 'package:nos_importas/screens/utils.dart';
 
-class SendMailFromLocalHost extends StatefulWidget {
-  const SendMailFromLocalHost({super.key});
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  final String title = 'Url Launcher';
+
+  const MyApp({super.key});
 
   @override
-  _SendMailFromLocalHostState createState() => _SendMailFromLocalHostState();
+  Widget build(BuildContext context) => MaterialApp(
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.deepOrange),
+        home: SendEmail(title: title),
+      );
 }
 
-class _SendMailFromLocalHostState extends State<SendMailFromLocalHost>
-    with SingleTickerProviderStateMixin {
-  SendMail() async {
-    String username = "ciudadcochabamba1@gmail.com";
-    String password = "nosimportas2022";
+class SendEmail extends StatefulWidget {
+  final String title;
 
-    final smtpServer = gmail(username, password);
-    // Use the SmtpServer class to configure an SMTP server:
-    // final smtpServer = SmtpServer('smtp.domain.com');
-    // See the named arguments of SmtpServer for further configuration
-    // options.
-
-    // Create our message.
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add('ciudadcochabamba1@gmail.com')
-      //..ccRecipients.addAll(['destCc1@example.com', 'destCc2@example.com'])
-      //..bccRecipients.add(Address('bccAddress@example.com'))
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-      //..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html =
-          "<h1>!!! AUXILIO PORFAVOR !!!</h1>\n<p>Hey! Here's some HTML content</p>";
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      showToast('Message Send Check your mail',
-          gravity: Toast.center, duration: 3);
-      print('Message sent: ' +
-          sendReport.toString()); //print if the email is sent
-    } on MailerException catch (e) {
-      print('Message not sent. \n' +
-          e.toString()); //print if the email is not sent
-      // e.toString() will show why the email is not sending
-    }
-  }
+  const SendEmail({
+    super.key,
+    required this.title,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(' Correo Electronico '),
-      ),
-      body: Center(
+  _SendEmailState createState() => _SendEmailState();
+}
+
+class _SendEmailState extends State<SendEmail> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          //title: const Text(' Correo Electronico '),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildButton(
+                text: 'Enviar Correo',
+                onClicked: () => Utils.openEmail(
+                  // Si son mas de 2 correos separar con ',' dentro la cadena.
+                  toEmail: 'ciudadcochabamba1@gmail.com',
+                  subject: 'ALERTA DE AUXLIO',
+                  body: 'Necesito ayuda, porfavor estoy en apuros !.',
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  Widget buildButton({
+    required String text,
+    required VoidCallback onClicked,
+  }) =>
+      Container(
+        padding: EdgeInsets.symmetric(vertical: 12),
         child: ElevatedButton.icon(
-          onPressed: () {
-            sendEmail();
-          },
+          onPressed: onClicked,
           style: TextButton.styleFrom(
               foregroundColor: Colors.purple, backgroundColor: Colors.purple),
           label: const Text(
@@ -78,11 +77,5 @@ class _SendMailFromLocalHostState extends State<SendMailFromLocalHost>
             color: Colors.black,
           ),
         ),
-      ),
-    );
-  }
-
-  showToast(String msg, {int? duration, int? gravity}) {
-    Toast.show(msg, textStyle: context, duration: duration, gravity: gravity);
-  }
+      );
 }
