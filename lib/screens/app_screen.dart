@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nos_importas/screens/maps_screen.dart';
+import 'package:nos_importas/screens/maps/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
-import 'package:nos_importas/screens/screen_controller.dart';
+import 'package:nos_importas/screens/maps/screen_controller.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/show_trust_users.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';

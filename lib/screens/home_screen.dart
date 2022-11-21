@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/app_screen.dart';
-import 'package:nos_importas/screens/screen_redirect.dart';
+import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
 import '../widget/login_handler.dart';
 import '../widget/sign_up_widget.dart';

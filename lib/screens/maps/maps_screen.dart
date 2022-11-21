@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 /*import 'package:nos_importas/functions/input_file.dart';
 import 'package:nos_importas/screens/app_screen.dart';*/
 
-import 'package:nos_importas/screens/maps_controller.dart';
+import 'package:nos_importas/screens/maps/maps_controller.dart';
 import 'package:provider/provider.dart';
 
 class MapsPage extends StatelessWidget {

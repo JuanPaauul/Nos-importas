@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
           //theme: ThemeData.dark().copyWith(
           //    colorScheme:
           //        ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
-          home: HomePage(),
+          initialRoute: Routes.SPLASH,
+          routes: appRoutes(),
         ),
       );
 }
