@@ -1,9 +1,8 @@
-// ignore_for_file: library_private_types_in_public_api, must_be_immutable, non_constant_identifier_names
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
+import 'package:nos_importas/screens/utils.dart';
 
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
@@ -17,67 +16,54 @@ class PanicPage extends StatefulWidget {
 }
 
 class _MiPagina1State extends State<PanicPage> {
-  int currentPage = 0;
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    const Button(),
+    const Police(),
+    const Sms(),
+    const Whatss(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                    foregroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 80, vertical: 30),
-                    textStyle: const TextStyle(
-                      color: Colors.blueGrey,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60.0),
-                    ),
-                    backgroundColor: Colors.red),
-                child: ElevatedButton.icon(
-                  onPressed: EmergencyButton,
-                  style: TextButton.styleFrom(
-                      foregroundColor: Colors.redAccent,
-                      backgroundColor: Colors.yellow),
-                  label: const Text(
-                    'EMERGENCIA',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 21,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black),
-                  ),
-                  icon: const Icon(
-                    Icons.warning,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                ),
-                onPressed: () {
-                  setState(() {});
-                },
-              ),
-            ],
-          ),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: const BotonFlotante(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.pink,
       ),
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
+        type: BottomNavigationBarType.fixed,
+        iconSize: 25.0,
+        selectedFontSize: 22.0,
+        unselectedFontSize: 17.0,
+        backgroundColor: Colors.pink,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(1.0),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.radio_button_on), label: ('Boton')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_police), label: ('Policia')),
+          BottomNavigationBarItem(icon: Icon(Icons.sms), label: ('SMS')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.whatsapp), label: ('WhatsApp')),
+        ],
+      ),
+      floatingActionButton: const BotonFlotante(),
     );
+  }
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
 
-// Boton visual
-void EmergencyButton() {}
-
 class CustomScreen extends StatelessWidget {
   final Color color;
-
   const CustomScreen({super.key, required this.color});
   @override
   Widget build(BuildContext context) {
@@ -96,6 +82,7 @@ class PanicPageSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: const Text('Contactos'),
       ),
       body: FutureBuilder(
@@ -117,16 +104,13 @@ class PanicPageSetting extends StatelessWidget {
 
 class _ListaUsuarios extends StatelessWidget {
   final List<Usuario> usuarios;
-
   const _ListaUsuarios(this.usuarios);
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: usuarios.length,
         itemBuilder: (BuildContext context, int i) {
           final usuario = usuarios[i];
-
           return FadeIn(
             delay: Duration(milliseconds: 200 * i),
             child: ListTile(
@@ -139,13 +123,210 @@ class _ListaUsuarios extends StatelessWidget {
   }
 }
 
+// Vista de Boton \\
+class Button extends StatefulWidget {
+  const Button({Key? key}) : super(key: key);
+
+  @override
+  State<Button> createState() => _ButtonState();
+}
+
+class _ButtonState extends State<Button> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                  foregroundColor: Colors.red,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 30),
+                  textStyle: const TextStyle(
+                    color: Colors.blueGrey,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                  ),
+                  backgroundColor: Colors.red),
+              child: ElevatedButton.icon(
+                // Sector amarrillo push \\
+                onPressed: () {
+                  // Por defecto
+                  Utils.openPhoneCall(phoneNumber: '110');
+                },
+                style: TextButton.styleFrom(
+                    foregroundColor: Colors.redAccent,
+                    backgroundColor: Colors.yellow),
+                label: const Text(
+                  'EMERGENCIA',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.black),
+                ),
+                icon: const Icon(
+                  Icons.warning,
+                  size: 40,
+                  color: Colors.black,
+                ),
+              ),
+              // Sector Rojo push \\
+              onPressed: () {
+                // Por defecto
+                Utils.openPhoneCall(phoneNumber: '110');
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Vista de Policia \\
+class Police extends StatefulWidget {
+  const Police({Key? key}) : super(key: key);
+
+  @override
+  State<Police> createState() => _PoliceState();
+}
+
+class _PoliceState extends State<Police> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Region Cochabamba',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.link,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openLink(
+                        url:
+                            'https://wiconnect.iadb.org/osc/gestion-estrategica-comando-departamental-de-policia-cochabamba/');
+                  },
+                ),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Radio Patrullas',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.facebook,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openLink(
+                        url:
+                            'https://www.facebook.com/PoliciaBolivianaCochabamba');
+                  },
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+}
+
+// Vista de Mensajes \\
+class Sms extends StatefulWidget {
+  const Sms({Key? key}) : super(key: key);
+
+  @override
+  State<Sms> createState() => _SmsState();
+}
+
+class _SmsState extends State<Sms> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Open SMS',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.open_in_full,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openSMS(phoneNumber: '+4912388128311');
+                  },
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+}
+
+// Vista de Whattsapp \\
+class Whatss extends StatefulWidget {
+  const Whatss({Key? key}) : super(key: key);
+
+  @override
+  State<Whatss> createState() => _WhatssState();
+}
+
+class _WhatssState extends State<Whatss> {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('HOLA MUNDO de whattsapp. En proceso !!!'),
+    );
+  }
+}
+
+// Para contactos extraidos de un HTTP \\
 class BotonFlotante extends StatelessWidget {
   const BotonFlotante({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 176, 121, 39),
+        backgroundColor: const Color.fromARGB(255, 117, 176, 39),
         elevation: 0,
         highlightElevation: 0,
         child: const Icon(Icons.person_add),
