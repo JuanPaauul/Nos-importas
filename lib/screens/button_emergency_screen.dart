@@ -36,8 +36,8 @@ class _MiPagina1State extends State<PanicPage> {
         onTap: onTabTapped,
         type: BottomNavigationBarType.fixed,
         iconSize: 25.0,
-        selectedFontSize: 20.0,
-        unselectedFontSize: 15.0,
+        selectedFontSize: 22.0,
+        unselectedFontSize: 17.0,
         backgroundColor: Colors.pink,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(1.0),
@@ -201,19 +201,56 @@ class _PoliceState extends State<Police> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildButton(
-                text: 'Region Cochabamba',
-                onClicked: () => Utils.openLink(
-                    url:
-                        // Por defecto
-                        'https://wiconnect.iadb.org/osc/gestion-estrategica-comando-departamental-de-policia-cochabamba/'),
-              ),
-              buildButton(
-                text: 'Radio Patrullas',
-                onClicked: () => Utils.openLink(
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Region Cochabamba',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.link,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
                     // Por defecto
-                    url: 'https://www.facebook.com/PoliciaBolivianaCochabamba'),
+                    Utils.openLink(
+                        url:
+                            'https://wiconnect.iadb.org/osc/gestion-estrategica-comando-departamental-de-policia-cochabamba/');
+                  },
+                ),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Radio Patrullas',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.facebook,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openLink(
+                        url:
+                            'https://www.facebook.com/PoliciaBolivianaCochabamba');
+                  },
+                ),
+                onPressed: () {},
               ),
             ],
           ),
@@ -235,11 +272,29 @@ class _SmsState extends State<Sms> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildButton(
-                text: 'Open SMS',
-                // Por defecto
-                onClicked: () => Utils.openSMS(phoneNumber: '+4912388128311'),
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Open SMS',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.open_in_full,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openSMS(phoneNumber: '+4912388128311');
+                  },
+                ),
+                onPressed: () {},
               ),
             ],
           ),
@@ -248,32 +303,21 @@ class _SmsState extends State<Sms> {
 }
 
 // Vista de Whattsapp \\
-class Whatss extends StatelessWidget {
+class Whatss extends StatefulWidget {
   const Whatss({Key? key}) : super(key: key);
 
   @override
+  State<Whatss> createState() => _WhatssState();
+}
+
+class _WhatssState extends State<Whatss> {
+  @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('HOLA MUNDO de whattsapp.'),
+      child: Text('HOLA MUNDO de whattsapp. En proceso !!!'),
     );
   }
 }
-
-// Links \\
-Widget buildButton({
-  required String text,
-  required VoidCallback onClicked,
-}) =>
-    Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: ElevatedButton(
-        onPressed: onClicked,
-        child: Text(
-          text,
-          style: const TextStyle(fontSize: 24),
-        ),
-      ),
-    );
 
 // Para contactos extraidos de un HTTP \\
 class BotonFlotante extends StatelessWidget {
