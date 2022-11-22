@@ -1,8 +1,6 @@
-// ignore_for_file: library_private_types_in_public_api, must_be_immutable, non_constant_identifier_names
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:nos_importas/main.dart';
 import 'package:nos_importas/models/reqres_model.dart';
 import 'package:nos_importas/screens/utils.dart';
 
@@ -64,9 +62,6 @@ class _MiPagina1State extends State<PanicPage> {
   }
 }
 
-// Boton visual para llamar a 110 \\
-void EmergencyButton() {}
-
 class CustomScreen extends StatelessWidget {
   final Color color;
   const CustomScreen({super.key, required this.color});
@@ -103,7 +98,6 @@ class PanicPageSetting extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: const BotonFlotante(),
-      //bottomNavigationBar: const BarraNavegacion(),
     );
   }
 }
@@ -130,9 +124,14 @@ class _ListaUsuarios extends StatelessWidget {
 }
 
 // Vista de Boton \\
-class Button extends StatelessWidget {
+class Button extends StatefulWidget {
   const Button({Key? key}) : super(key: key);
 
+  @override
+  State<Button> createState() => _ButtonState();
+}
+
+class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +152,11 @@ class Button extends StatelessWidget {
                   ),
                   backgroundColor: Colors.red),
               child: ElevatedButton.icon(
-                onPressed: EmergencyButton,
+                // Sector amarrillo push \\
+                onPressed: () {
+                  // Por defecto
+                  Utils.openPhoneCall(phoneNumber: '110');
+                },
                 style: TextButton.styleFrom(
                     foregroundColor: Colors.redAccent,
                     backgroundColor: Colors.yellow),
@@ -171,8 +174,10 @@ class Button extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
+              // Sector Rojo push \\
               onPressed: () {
-                //setState(() {});
+                // Por defecto
+                Utils.openPhoneCall(phoneNumber: '110');
               },
             ),
           ],
@@ -201,11 +206,13 @@ class _PoliceState extends State<Police> {
                 text: 'Region Cochabamba',
                 onClicked: () => Utils.openLink(
                     url:
+                        // Por defecto
                         'https://wiconnect.iadb.org/osc/gestion-estrategica-comando-departamental-de-policia-cochabamba/'),
               ),
               buildButton(
                 text: 'Radio Patrullas',
                 onClicked: () => Utils.openLink(
+                    // Por defecto
                     url: 'https://www.facebook.com/PoliciaBolivianaCochabamba'),
               ),
             ],
@@ -215,15 +222,29 @@ class _PoliceState extends State<Police> {
 }
 
 // Vista de Mensajes \\
-class Sms extends StatelessWidget {
+class Sms extends StatefulWidget {
   const Sms({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('HOLA MUNDO de mensajes.'),
-    );
-  }
+  State<Sms> createState() => _SmsState();
+}
+
+class _SmsState extends State<Sms> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildButton(
+                text: 'Open SMS',
+                // Por defecto
+                onClicked: () => Utils.openSMS(phoneNumber: '+4912388128311'),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 // Vista de Whattsapp \\
