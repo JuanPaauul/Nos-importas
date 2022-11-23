@@ -220,9 +220,7 @@ class _PoliceState extends State<Police> {
                   ),
                   onPressed: () {
                     // Por defecto
-                    Utils.openLink(
-                        url:
-                            'https://wiconnect.iadb.org/osc/gestion-estrategica-comando-departamental-de-policia-cochabamba/');
+                    Utils.openLink(url: 'https://www.policia.bo/');
                   },
                 ),
                 onPressed: () {},
@@ -248,6 +246,30 @@ class _PoliceState extends State<Police> {
                     Utils.openLink(
                         url:
                             'https://www.facebook.com/PoliciaBolivianaCochabamba');
+                  },
+                ),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Canales',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.video_library,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto
+                    Utils.openLink(
+                        url: 'https://www.youtube.com/watch?v=SKne6Zo-Hd4');
                   },
                 ),
                 onPressed: () {},
@@ -285,7 +307,7 @@ class _SmsState extends State<Sms> {
                         color: Colors.white),
                   ),
                   icon: const Icon(
-                    Icons.open_in_full,
+                    Icons.keyboard,
                     size: 40,
                     color: Colors.black,
                   ),

@@ -26,7 +26,8 @@ class HomePage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Center(child: Text('Hubo un error!'));
             } else {
-              return const SignUpPage();
+              //return const SignUpPage();
+              return const CameraPage();
             }
           },
         ),

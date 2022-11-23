@@ -1,10 +1,7 @@
-// ignore_for_file: unused_import, library_private_types_in_public_api, unused_local_variable, sort_child_properties_last, use_build_context_synchronously
-
-import 'dart:io';
+// ignore_for_file: library_private_types_in_public_api, unused_local_variable, deprecated_member_use, duplicate_ignore
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nos_importas/screens/camera_screen.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -19,30 +16,97 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: ElevatedButton.icon(
-      onPressed: _optionsDialogBox,
-      style: TextButton.styleFrom(
-          foregroundColor: Colors.redAccent, backgroundColor: Colors.black),
-      label: const Text(
-        'ABRIR',
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 70,
-            fontStyle: FontStyle.italic,
-            color: Colors.white),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
       ),
-      icon: const Icon(
-        Icons.open_in_browser,
-        size: 100,
-        color: Colors.blue,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+              child: ElevatedButton.icon(
+                style: TextButton.styleFrom(backgroundColor: Colors.black),
+                label: const Text(
+                  'Tomar Fotografia',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.camera,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+                onPressed: () {
+                  _openCamera();
+                },
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: ElevatedButton.icon(
+                style: TextButton.styleFrom(backgroundColor: Colors.black),
+                label: const Text(
+                  'Tomar Video',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.video_call,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+                onPressed: () {
+                  _openVideo();
+                },
+              ),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: ElevatedButton.icon(
+                style: TextButton.styleFrom(backgroundColor: Colors.black),
+                label: const Text(
+                  'Seleccionar de Galeria',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 21,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.photo_album,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+                onPressed: () {
+                  _openGallery();
+                },
+              ),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
-    )));
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 1.0,
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.black,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.exposure_zero), label: ('')),
+          BottomNavigationBarItem(icon: Icon(Icons.exposure_zero), label: ('')),
+        ],
+      ),
+    );
   }
 
   void _openCamera() {
     ImagePicker picker = ImagePicker();
-    // ignore: deprecated_member_use
     final picture = picker.getImage(
       source: ImageSource.camera,
     );
@@ -65,54 +129,5 @@ class _CameraPageState extends State<CameraPage> {
       source: ImageSource.gallery,
     );
     Navigator.pop(context);
-  }
-
-  Future<void> _optionsDialogBox() {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: const Text('Tomar fotografia Simulador'),
-                    onTap: _openCamera,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                  ),
-                  GestureDetector(
-                    child: const Text('Tomar video - Simulador'),
-                    onTap: _openVideo,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(20.0),
-                  ),
-                  GestureDetector(
-                    child: const Text('Tomar fotografia Real - IN PROCESS'),
-                    onTap: () async {
-                      String path = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CameraScreen()));
-                      PickedFile pickedFile = PickedFile(path);
-                      images.add(pickedFile);
-                      Navigator.pop(context);
-                      setState(() {});
-                    },
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(40.0),
-                  ),
-                  GestureDetector(
-                    child: const Text('Seleccionar de galeria'),
-                    onTap: _openGallery,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 }
