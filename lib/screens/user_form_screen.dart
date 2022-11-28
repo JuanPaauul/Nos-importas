@@ -11,94 +11,95 @@ class UserForm extends StatefulWidget {
 }
 
 class _UserFormState extends State<UserForm> {
+  final TextEditingController _emailTEC = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 20,
-            color: Colors.black,
-          ),
+        title: const Text(
+          "Añadir usuario de confianza",
         ),
+        automaticallyImplyLeading: true,
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //Tittle
-          const Text(
-            "Añadir usuario\nde confianza",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 40,
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
+                "Por favor, ingrese el correo electronico de su",
+                style: TextStyle(
+                    fontSize: 15, color: Color.fromRGBO(53, 167, 219, 1)),
+                textAlign: TextAlign.left,
+              ),
             ),
           ),
-          const SizedBox(
-            height: 10,
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
+                "Usuario de Confianza",
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Color.fromRGBO(53, 167, 219, 1),
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+            ),
           ),
           //Gmail form
-          formGmail(),
-          const SizedBox(
-            height: 10,
-          ),
+          inputEmail(
+              "Correo electronico del usuario de confianza", false, _emailTEC),
           //Botton to send request
-          MaterialButton(
-            minWidth: double.infinity,
-            height: 60,
-            onPressed: () {
-              /*Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const PanicPage()));*/
-
-              showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => AlertDialog(
-                          title: const Text(
-                              'Solicitud para nuevo\nusuario de confianza'),
-                          content: const Text('¡Solicitud enviada\ncon éxito!'),
-                          actions: <Widget>[
-                            FloatingActionButton(
-                              child: const Text('Ok'),
-                              onPressed: () {
-                                Navigator.of(context).pop(true);
-                              },
-                            )
-                          ]));
-            },
-            color: const Color(0xff0095FF),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-            child: const Text(
-              "Enviar solicitud",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18),
-            ),
-          ),
+          ElevatedButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => AlertDialog(
+                            title: const Text(
+                                'Solicitud para nuevo\nusuario de confianza'),
+                            content:
+                                const Text('¡Solicitud enviada\ncon éxito!'),
+                            actions: <Widget>[
+                              FloatingActionButton(
+                                child: const Text('Ok'),
+                                onPressed: () {
+                                  Navigator.of(context).pop(true);
+                                },
+                              )
+                            ]));
+              },
+              child: const Text("Enviar solicitud",
+                  style:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.normal))),
         ],
       ),
     );
   }
 
-  Container formGmail() {
+  Container inputEmail(
+      String placeholder, bool splitWidth, TextEditingController controller) {
+    var widthOfWidget = 1.0;
+    splitWidth ? widthOfWidget = 2.33 : widthOfWidget = 1;
     return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: Colors.grey)),
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        margin: const EdgeInsets.symmetric(horizontal: 15),
-        child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          style: const TextStyle(fontSize: 20),
-          decoration: const InputDecoration(
-              hintText: "Correo de Usuario de confianza",
-              border: InputBorder.none),
-        ));
+      width: MediaQuery.of(context).size.width / widthOfWidget,
+      margin: const EdgeInsets.all(20),
+      child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        controller: controller,
+        style: const TextStyle(
+          fontSize: 20,
+        ),
+        decoration: InputDecoration(
+            border: const OutlineInputBorder(), labelText: placeholder),
+      ),
+    );
   }
 }
