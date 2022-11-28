@@ -8,8 +8,6 @@ import '../widget/sign_up_widget.dart';
 import 'package:nos_importas/screens/camera_function.dart';
 import 'package:nos_importas/screens/send_mail.dart';
 
-import 'button_emergency_screen.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

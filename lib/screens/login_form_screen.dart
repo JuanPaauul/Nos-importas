@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nos_importas/functions/input_file.dart';
-import 'package:nos_importas/screens/maps/screen_redirect.dart';
+import 'maps/screen_redirect.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
