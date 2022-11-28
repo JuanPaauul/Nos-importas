@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
               print(snapshot.data);
-              return const AppPage();
+              return const FirstView();
             } else if (snapshot.hasError) {
               return const Center(child: Text('Hubo un error!'));
             } else {
