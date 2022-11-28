@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
 import 'package:nos_importas/screens/maps/screen_controller.dart';
+import 'package:nos_importas/screens/user_confidence_list.dart';
 import 'package:nos_importas/screens/user_form_screen.dart';
 import 'package:nos_importas/screens/show_trust_users.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
@@ -73,7 +74,7 @@ class _AppPageState extends State<AppPage> {
         physics: const NeverScrollableScrollPhysics(),
         // ignore: prefer_const_literals_to_create_immutables
         children: [
-          const ShowTrustUsersForm(),
+          const UserList(),
           const MapsPage(),
           const PanicPage(),
           const CameraPage(),
