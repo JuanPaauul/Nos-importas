@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Background extends StatelessWidget {
   // ignore: unnecessary_const
@@ -23,16 +21,16 @@ class Background extends StatelessWidget {
           decoration: boxDecoration,
         ),
         //blue box
-        Positioned(top: -180, left: 80, child: _BlueBox()),
-        Positioned(top: 550, left: -100, child: _BlueBox()),
-        Positioned(top: 470, left: 240, child: _CircleBox()),
+        Positioned(top: -180, left: 80, child: BlueBox()),
+        Positioned(top: 565, left: -88, child: BlueBox()),
+        Positioned(top: 510, left: 240, child: CircleBox()),
       ],
     );
   }
 }
 
 // ignore: camel_case_types
-class _BlueBox extends StatelessWidget {
+class BlueBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
@@ -51,7 +49,7 @@ class _BlueBox extends StatelessWidget {
   }
 }
 
-class _CircleBox extends StatelessWidget {
+class CircleBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
