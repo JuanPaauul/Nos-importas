@@ -47,19 +47,3 @@ class LoginHandler extends StatelessWidget {
     );
   }
 }
-
-
-/*
-hasData = true;
-String body = utf8.decode(response.bodyBytes);
-final jsonBody = jsonDecode(body);
-UserModel userModel = UserModel(
-  jsonBody.uid,
-  jsonBody.displayName,
-  jsonBody.email,
-  jsonBody.phoneNumber,
-  jsonBody.province,
-  jsonBody.city,
-);
-return userModel;
-*/
