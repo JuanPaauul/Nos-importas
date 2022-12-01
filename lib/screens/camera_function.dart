@@ -18,9 +18,6 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*    appBar: AppBar(
-            backgroundColor: Colors.black,
-          ),*/
       body: Center(
         child: Stack(
           children: [
@@ -100,17 +97,6 @@ class _CameraPageState extends State<CameraPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      /*bottomNavigationBar: BottomNavigationBar(
-            iconSize: 1.0,
-            backgroundColor: Colors.black,
-            selectedItemColor: Colors.black,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.exposure_zero), label: ('')),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.exposure_zero), label: ('')),
-            ],
-          ),*/
     );
   }
 

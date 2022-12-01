@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_print
+import 'dart:ffi';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
 import 'package:nos_importas/screens/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
@@ -27,9 +30,6 @@ class _MiPagina1State extends State<PanicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -64,6 +64,7 @@ class _MiPagina1State extends State<PanicPage> {
 
 class CustomScreen extends StatelessWidget {
   final Color color;
+
   const CustomScreen({super.key, required this.color});
   @override
   Widget build(BuildContext context) {
@@ -81,10 +82,6 @@ class PanicPageSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: const Text('Contactos'),
-      ),
       body: FutureBuilder(
         future: getUsuarios(),
         builder:
@@ -104,6 +101,7 @@ class PanicPageSetting extends StatelessWidget {
 
 class _ListaUsuarios extends StatelessWidget {
   final List<Usuario> usuarios;
+
   const _ListaUsuarios(this.usuarios);
   @override
   Widget build(BuildContext context) {
@@ -111,6 +109,7 @@ class _ListaUsuarios extends StatelessWidget {
         itemCount: usuarios.length,
         itemBuilder: (BuildContext context, int i) {
           final usuario = usuarios[i];
+
           return FadeIn(
             delay: Duration(milliseconds: 200 * i),
             child: ListTile(
@@ -134,53 +133,36 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                  foregroundColor: Colors.red,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 80, vertical: 30),
-                  textStyle: const TextStyle(
-                    color: Colors.blueGrey,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  backgroundColor: Colors.red),
-              child: ElevatedButton.icon(
-                // Sector amarrillo push \\
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextButton(
+                child: ShinyButton(
+                    color: Colors.red,
+                    child: const Text(
+                      'Emergencia',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontStyle: FontStyle.normal),
+                    ),
+                    onPressed: () {
+                      // Por defecto
+                      Utils.openPhoneCall(phoneNumber: '110');
+                    }),
+
+                // Sector Rojo push \\
                 onPressed: () {
                   // Por defecto
                   Utils.openPhoneCall(phoneNumber: '110');
                 },
-                style: TextButton.styleFrom(
-                    foregroundColor: Colors.redAccent,
-                    backgroundColor: Colors.yellow),
-                label: const Text(
-                  'EMERGENCIA',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 21,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.black),
-                ),
-                icon: const Icon(
-                  Icons.warning,
-                  size: 40,
-                  color: Colors.black,
-                ),
               ),
-              // Sector Rojo push \\
-              onPressed: () {
-                // Por defecto
-                Utils.openPhoneCall(phoneNumber: '110');
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -325,18 +307,32 @@ class _SmsState extends State<Sms> {
 }
 
 // Vista de Whattsapp \\
-class Whatss extends StatefulWidget {
+class Whatss extends StatelessWidget {
   const Whatss({Key? key}) : super(key: key);
 
-  @override
-  State<Whatss> createState() => _WhatssState();
-}
+  void launchWhatsapp({@required number, @required message}) async {
+    String url = "whatsapp://send?phone=$number&text=$message";
 
-class _WhatssState extends State<Whatss> {
+    // ignore: deprecated_member_use
+    await canLaunch(url) ? launch(url) : print("No se pudo abrir Whatsapp");
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('HOLA MUNDO de whattsapp. En proceso !!!'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              // Por defecto \\
+              launchWhatsapp(
+                  number: "+75460326", message: "Alerta de Auxilio !!!");
+            },
+            child: const Text("Open Whatsapp"),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -357,6 +353,67 @@ class BotonFlotante extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) => const PanicPageSetting()));
+        });
+  }
+}
+
+//*****Boton Brillante*****
+
+class ShinyButton extends StatefulWidget {
+  final Widget child;
+  final Color color;
+  final VoidCallback onPressed;
+
+  const ShinyButton(
+      {super.key,
+      required this.color,
+      required this.onPressed,
+      required this.child});
+
+  @override
+  _ShinyButtonState createState() => _ShinyButtonState();
+}
+
+class _ShinyButtonState extends State<ShinyButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2300));
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+        animation: _controller,
+        builder: (context, _) {
+          return Container(
+            alignment: Alignment.center,
+            child: widget.child,
+            padding: const EdgeInsets.all(100),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              //shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  widget.color,
+                  Colors.white,
+                  widget.color,
+                  widget.color,
+                ],
+                stops: [0.0, _controller.value, 1.0, -10.0],
+              ),
+            ),
+          );
         });
   }
 }
