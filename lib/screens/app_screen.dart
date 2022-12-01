@@ -43,7 +43,7 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(42, 59, 113, 1),
+        backgroundColor: const Color.fromRGBO(42, 59, 113, 1),
         leading: PopupMenuButton(
           itemBuilder: (context) {
             return <PopupMenuEntry<options>>[
