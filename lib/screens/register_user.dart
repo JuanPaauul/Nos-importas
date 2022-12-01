@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:http/http.dart' as http;
+import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import 'dart:convert';
+import 'package:nos_importas/screens/route/routes.dart';
 
 import 'app_screen.dart';
 
@@ -81,7 +83,9 @@ class _RegisterUserState extends State<RegisterUser> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const AppPage()));
+                                    builder: (context) => const FirstView()));
+                            Navigator.pushReplacementNamed(
+                                context, Routes.FIRSTVIEW);
                           }
                         },
                         style: OutlinedButton.styleFrom(

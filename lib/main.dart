@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nos_importas/provider/google_sign_in.dart';
 import 'package:nos_importas/screens/home_screen.dart';
+import 'package:nos_importas/screens/route/pages.dart';
+import 'package:nos_importas/screens/route/routes.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -19,13 +21,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: title,
           //theme: ThemeData.dark().copyWith(
           //    colorScheme:
           //        ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
-          home: HomePage(),
+          //home: HomePage(),
+          initialRoute: Routes.SPLASH,
+          routes: appRoutes(),
         ),
       );
 }
