@@ -1,9 +1,10 @@
-import 'dart:ui';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'app_screen.dart';
 
 class RegisterUser extends StatefulWidget {
   const RegisterUser({super.key});
@@ -11,6 +12,8 @@ class RegisterUser extends StatefulWidget {
   @override
   State<RegisterUser> createState() => _RegisterUserState();
 }
+
+final user = FirebaseAuth.instance.currentUser!;
 
 class _RegisterUserState extends State<RegisterUser> {
   final TextEditingController _nameTEC = TextEditingController();
@@ -24,6 +27,7 @@ class _RegisterUserState extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
+    print(user.uid.characters);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
@@ -42,8 +46,9 @@ class _RegisterUserState extends State<RegisterUser> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
-                      height: 95,
+                      height: 55,
                     ),
+                    subTitle(),
                     Row(
                       children: [
                         formTitle(),
@@ -71,8 +76,13 @@ class _RegisterUserState extends State<RegisterUser> {
                       height: 140,
                     ),
                     OutlinedButton(
-                        onPressed: () {
-                          registerUser();
+                        onPressed: () async {
+                          if (await registerUser()) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const AppPage()));
+                          }
                         },
                         style: OutlinedButton.styleFrom(
                             side: const BorderSide(
@@ -101,9 +111,24 @@ class _RegisterUserState extends State<RegisterUser> {
       padding: EdgeInsets.all(7.0),
       child: SizedBox(
         child: Text(
-          "Registrarse",
+          "Regístrate",
           style: TextStyle(
               fontSize: 35, color: Colors.white, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.left,
+        ),
+      ),
+    );
+  }
+
+  Padding subTitle() {
+    return const Padding(
+      padding: EdgeInsets.all(7.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: Text(
+          "Parece que no tienes una cuenta! Por favor",
+          style: TextStyle(
+              fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
           textAlign: TextAlign.left,
         ),
       ),
@@ -167,7 +192,8 @@ class _RegisterUserState extends State<RegisterUser> {
     );
   }
 
-  registerUser() async {
+  Future<bool> registerUser() async {
+    String uid = user.uid;
     String name = _nameTEC.text;
     String lastName = _lastNameTEC.text;
     String phoneNumber = _phoneNumberTEC.text;
@@ -175,20 +201,24 @@ class _RegisterUserState extends State<RegisterUser> {
     String province = _provinceTEC.text;
 
     var postBody = {
-      'FirstName': name,
-      'LastName': lastName,
-      'PhoneNumber': phoneNumber,
-      'City': city,
-      'Province': province
+      'userId': user.uid,
+      'firstName': name,
+      'lastName': lastName,
+      'email': user.email,
+      'phone': phoneNumber,
+      'city': city,
+      'province': province
     };
 
     var postBodyEncoded = json.encode(postBody);
 
-    var url =
-        Uri.parse('https://app-prev-ries.herokuapp.com/api/basicinformation');
+    var url = Uri.parse(
+        'https://appprevriskapi-production.up.railway.app/api/userinformation');
     var response = await http.post(url, body: postBodyEncoded, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
     });
+
+    return response.statusCode == 201;
   }
 }

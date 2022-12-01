@@ -1,48 +1,49 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:nos_importas/screens/app_screen.dart';
-
-import '../models/user_model.dart';
+import '../screens/register_user.dart';
 
 class LoginHandler extends StatelessWidget {
   const LoginHandler({super.key});
 
+  Future<Response> userExists(User user) async {
+    final response = await http.get(Uri.parse(
+        "https://appprevriskapi-production.up.railway.app/api/userinformation/uid/${user.uid}"));
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    bool hasData = false;
-    Future<UserModel> user_data;
-    Future<UserModel> getUserData() async {
-      final response = await http.get(Uri.parse(
-          "https://app-prev-ries.herokuapp.com/api/userinformation/uid/${user.uid}"));
-      if (response.statusCode == 200) {
-        hasData = true;
-        String body = utf8.decode(response.bodyBytes);
-        final jsonBody = jsonDecode(body);
-        UserModel userModel = UserModel(
-          jsonBody.uid,
-          jsonBody.displayName,
-          jsonBody.email,
-          jsonBody.phoneNumber,
-          jsonBody.province,
-          jsonBody.city,
-        );
-        return userModel;
-      } else {
-        throw Exception("something happened");
-      }
-    }
-
-    user_data = getUserData();
-    print(user_data);
-
-    if (hasData) {
-      return const AppPage();
-    }
-    return const AppPage();
+    return FutureBuilder<Response>(
+      future: userExists(user),
+      builder: (context, AsyncSnapshot<Response> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data?.statusCode == 200) {
+            return const AppPage();
+          } else {
+            return const RegisterUser();
+          }
+        } else {
+          return Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 30,
+              ),
+              Text("Verificando datos de la cuenta",
+                  style: TextStyle(
+                    color: Color.fromRGBO(53, 167, 219, 1),
+                    fontSize: 20,
+                  ))
+            ],
+          ));
+        }
+      },
+    );
   }
 }

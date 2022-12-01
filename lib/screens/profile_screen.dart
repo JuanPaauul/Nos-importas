@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/provider/google_sign_in.dart';
+import 'package:nos_importas/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -36,6 +37,10 @@ class ProfileScreen extends StatelessWidget {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
                     provider.logout();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
                   },
                   child: const Text("Cerrar sesión"))
             ],
