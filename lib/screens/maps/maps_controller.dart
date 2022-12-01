@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nos_importas/screens/utils/map_style.dart';
@@ -58,13 +57,22 @@ class MapsController extends ChangeNotifier {
 
   Position? _initialPosition;
   Position? get initialPosition => _initialPosition;
-  /**/ List<LatLng> polyPointsListCasa = [
-    LatLng(-17.354536, -66.155990),
-    LatLng(-17.354793, -66.155054),
-    LatLng(-17.355611, -66.155254),
-    LatLng(-17.355153, -66.156244)
+  List<map_tool.LatLng> polyPointsListCasa = [
+    map_tool.LatLng(-17.354536, -66.155990),
+    map_tool.LatLng(-17.354793, -66.155054),
+    map_tool.LatLng(-17.355611, -66.155254),
+    map_tool.LatLng(-17.355153, -66.156244)
   ];
-
+  List<map_tool.LatLng> coorRedTool = [
+    //punta superior norteoes
+    map_tool.LatLng(-17.369556, -66.143199),
+    // supe norte este
+    map_tool.LatLng(-17.370425, -66.141671),
+    //punta infe sud este
+    map_tool.LatLng(-17.373822, -66.142293),
+    //punta inferior sud oeste
+    map_tool.LatLng(-17.373625, -66.144058)
+  ];
   List<LatLng> coorRed = [
     //punta superior norteoes
     LatLng(-17.369556, -66.143199),
@@ -85,35 +93,32 @@ class MapsController extends ChangeNotifier {
     //punta inferior sud este
     LatLng(-17.373625, -66.144058)
   ];
-  /*void checkoutUpdateLocation(LatLng poitLatLng) {
-    setState(() {
-      isInSelectedArea = map_tool.PolygonUtil.containsLocation(
-        poitLatLng as map_tool.LatLng,
-        polyPointsListCasa as List<map_tool.LatLng>,
-        false,
-      );
-    });
-  }*/
+  bool checkoutUpdateLocation(LatLng poitLatLng) {
+    //setState(() {
+    List<map_tool.LatLng> lista = List.from(polyPointsListCasa);
+    isInSelectedArea = map_tool.PolygonUtil.containsLocation(
+      map_tool.LatLng(poitLatLng.latitude, poitLatLng.longitude),
+      coorRedTool,
+      false,
+    );
+    //});
+    return isInSelectedArea;
+  }
 
-  void drawPolygon(position) {
+  void drawPolygon() {
     newPolygon();
     final polygonId = PolygonId(_polygonId);
     late Polygon polygon;
-    if (_polygons.containsKey(polygonId)) {
-      final tmp = _polygons[polygonId]!;
-      polygon = tmp.copyWith(
-        pointsParam: [...tmp.points, position],
-      );
-    } else {
-      //final color = Colors.primaries[_polygons.length];
-      final color = Color.fromARGB(255, 70, 244, 54);
-      polygon = Polygon(
-          polygonId: polygonId,
-          points: coorGreen,
-          strokeWidth: 4,
-          strokeColor: color,
-          fillColor: color.withOpacity(0.4));
-    }
+
+    //final color = Colors.primaries[_polygons.length];
+    final color = Color.fromARGB(255, 70, 244, 54);
+    polygon = Polygon(
+        polygonId: polygonId,
+        points: coorGreen,
+        strokeWidth: 4,
+        strokeColor: color,
+        fillColor: color.withOpacity(0.4));
+
     _polygons[polygonId] = polygon;
     notifyListeners();
   }
@@ -121,22 +126,17 @@ class MapsController extends ChangeNotifier {
   void onTap(LatLng position) async {
     final polygonId = PolygonId(_polygonId);
     late Polygon polygon;
-    if (_polygons.containsKey(polygonId)) {
-      final tmp = _polygons[polygonId]!;
-      polygon = tmp.copyWith(
-        pointsParam: [...tmp.points, position],
-      );
-    } else {
-      //final color = Colors.primaries[_polygons.length];
-      final color = Colors.red;
-      polygon = Polygon(
-          polygonId: polygonId,
-          points: coorRed,
-          strokeWidth: 4,
-          strokeColor: color,
-          fillColor: color.withOpacity(0.4));
-      drawPolygon(position);
-    }
+
+    //final color = Colors.primaries[_polygons.length];
+    final color = Colors.red;
+    polygon = Polygon(
+        polygonId: polygonId,
+        points: coorRed,
+        strokeWidth: 4,
+        strokeColor: color,
+        fillColor: color.withOpacity(0.4));
+    drawPolygon();
+
     _polygons[polygonId] = polygon;
     notifyListeners();
   }
