@@ -49,7 +49,7 @@ class _UserDates extends StatelessWidget {
           final usuario = usuarios[i];
 
           return FadeIn(
-            delay: Duration(milliseconds: 200 * i),
+            delay: Duration(milliseconds: 150 * i),
             child: ListTile(
                 onTap: () {},
                 onLongPress: () {
