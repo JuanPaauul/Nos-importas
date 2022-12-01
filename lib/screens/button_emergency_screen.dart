@@ -29,9 +29,6 @@ class _MiPagina1State extends State<PanicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -83,10 +80,6 @@ class PanicPageSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: const Text('Contactos'),
-      ),
       body: FutureBuilder(
         future: getUsuarios(),
         builder:

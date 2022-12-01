@@ -18,9 +18,6 @@ class SendEmail extends StatefulWidget {
 class _SendEmailState extends State<SendEmail> {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.purple,
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,17 +33,6 @@ class _SendEmailState extends State<SendEmail> {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          iconSize: 1.0,
-          backgroundColor: Colors.purple,
-          selectedItemColor: Colors.purple,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.exposure_zero), label: ('')),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.exposure_zero), label: ('')),
-          ],
         ),
       );
 
