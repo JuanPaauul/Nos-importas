@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nos_importas/provider/google_sign_in.dart';
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
           //theme: ThemeData.dark().copyWith(
           //    colorScheme:
           //        ColorScheme.fromSwatch().copyWith(secondary: Colors.indigo)),
+          //home: HomePage(),
           initialRoute: Routes.SPLASH,
           routes: appRoutes(),
         ),

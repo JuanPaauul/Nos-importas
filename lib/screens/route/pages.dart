@@ -6,11 +6,12 @@ import 'package:nos_importas/screens/maps/request_permission/request_permission_
 import 'package:nos_importas/screens/route/routes.dart';
 import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import 'package:nos_importas/screens/maps/screen_redirect.dart';
+import 'package:nos_importas/widget/login_handler.dart';
 
 Map<String, Widget Function(BuildContext)> appRoutes() {
   return {
     Routes.SPLASH: (_) => const HomePage(),
-    Routes.VIEWS: (_) => const AppPage(),
+    Routes.VIEWS: (_) => LoginHandler(),
     Routes.MAPS: (_) => const MapsPage(),
     Routes.PERMISSIONS: (_) => const RequestPermissionPage(),
     Routes.FIRSTVIEW: (_) => const FirstView(),
