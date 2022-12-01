@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_print
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
 import 'package:nos_importas/screens/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
@@ -325,18 +327,32 @@ class _SmsState extends State<Sms> {
 }
 
 // Vista de Whattsapp \\
-class Whatss extends StatefulWidget {
+class Whatss extends StatelessWidget {
   const Whatss({Key? key}) : super(key: key);
 
-  @override
-  State<Whatss> createState() => _WhatssState();
-}
+  void launchWhatsapp({@required number, @required message}) async {
+    String url = "whatsapp://send?phone=$number&text=$message";
 
-class _WhatssState extends State<Whatss> {
+    // ignore: deprecated_member_use
+    await canLaunch(url) ? launch(url) : print("No se pudo abrir Whatsapp");
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('HOLA MUNDO de whattsapp. En proceso !!!'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              // Por defecto \\
+              launchWhatsapp(
+                  number: "+75460326", message: "Alerta de Auxilio !!!");
+            },
+            child: const Text("Open Whatsapp"),
+          ),
+        ),
+      ),
     );
   }
 }
