@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:nos_importas/screens/app_screen.dart';
+import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import '../screens/register_user.dart';
 
 class LoginHandler extends StatelessWidget {
@@ -22,7 +22,7 @@ class LoginHandler extends StatelessWidget {
       builder: (context, AsyncSnapshot<Response> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data?.statusCode == 200) {
-            return const AppPage();
+            return const FirstView();
           } else {
             return const RegisterUser();
           }
