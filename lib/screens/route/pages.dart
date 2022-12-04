@@ -11,7 +11,7 @@ import 'package:nos_importas/widget/login_handler.dart';
 Map<String, Widget Function(BuildContext)> appRoutes() {
   return {
     Routes.SPLASH: (_) => const HomePage(),
-    Routes.VIEWS: (_) => LoginHandler(),
+    Routes.VIEWS: (_) => AppPage(),
     Routes.MAPS: (_) => const MapsPage(),
     Routes.PERMISSIONS: (_) => const RequestPermissionPage(),
     Routes.FIRSTVIEW: (_) => const FirstView(),

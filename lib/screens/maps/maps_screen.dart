@@ -3,11 +3,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 /*import 'package:nos_importas/functions/input_file.dart';
 import 'package:nos_importas/screens/app_screen.dart';*/
-import 'package:quickalert/quickalert.dart';
 import 'package:nos_importas/screens/maps/maps_controller.dart';
 import 'package:provider/provider.dart';
 
 bool check = false;
+/*
 void showAlert(context) {
   QuickAlert.show(
     context: context,
@@ -15,7 +15,7 @@ void showAlert(context) {
     title: 'Reporte de Zona',
     text: 'Tu estas fuera del area segura',
   );
-}
+}*/
 
 class MapsPage extends StatelessWidget {
   const MapsPage({Key? key}) : super(key: key);
@@ -60,14 +60,14 @@ class MapsPage extends StatelessWidget {
                     controller.initialPosition!.longitude));
 
                 print(check);
-                if (check) {
+                /*if (check) {
                   return QuickAlert.show(
                     //context: context,
                     type: QuickAlertType.error,
                     title: 'Reporte de Zona',
                     text: 'Tu estas fuera del area segura',
                   );
-                }
+                }*/
                 print(controller.initialPosition!.latitude);
                 print(controller.initialPosition!.longitude);
                 //controller.newPolygon();
