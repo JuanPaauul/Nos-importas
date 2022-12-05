@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nos_importas/screens/user_confidence_list.dart';
-import 'package:nos_importas/functions/input_file.dart';
-import 'package:animated_background/animated_background.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:nos_importas/widget/background.dart';
+import 'package:email_validator/email_validator.dart';
 
 //import 'package:nos_importas/screens/app_screen.dart';
 
@@ -67,22 +68,7 @@ class _UserFormState extends State<UserForm>
               //Botton to send request
               ElevatedButton(
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => AlertDialog(
-                                title: const Text(
-                                    'Solicitud para nuevo\nusuario de confianza'),
-                                content: const Text(
-                                    '¡Solicitud enviada\ncon éxito!'),
-                                actions: <Widget>[
-                                  FloatingActionButton(
-                                    child: const Text('Ok'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop(true);
-                                    },
-                                  )
-                                ]));
+                    dialogMessage(context, _emailTEC.value.text);
                   },
                   child: const Text("Enviar solicitud",
                       style: TextStyle(
@@ -93,6 +79,36 @@ class _UserFormState extends State<UserForm>
         ],
       ),
     );
+  }
+
+  Future<String> notifyUser(String email) async {
+    final response = await http.get(Uri.parse(
+        "https://appprevriskapi-production.up.railway.app/api/userinformation/uid/${email}"));
+    if (response.statusCode == 200) {
+      return "El usuario fue notificado";
+    }
+    return "Se envio una correo de invitacion al usuario";
+  }
+
+  Future<dynamic> dialogMessage(BuildContext context, String email) async {
+    String messageContent = "";
+    EmailValidator.validate(email)
+        ? messageContent = await notifyUser(_emailTEC.value.text)
+        : messageContent = "Escribe un correo electronico válido!";
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+                title: const Text('Solicitud para nuevo\nusuario de confianza'),
+                content: Text(messageContent),
+                actions: <Widget>[
+                  FloatingActionButton(
+                    child: const Text('Ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                  )
+                ]));
   }
 
   Container inputEmail(
