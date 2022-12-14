@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Background_1 extends StatelessWidget {
+class Background_email_message extends StatelessWidget {
   // ignore: unnecessary_const
   static const boxDecoration = const BoxDecoration(
       gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: [0.2, 10],
-          colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 137, 228, 255)]));
-  const Background_1({super.key});
+          stops: [0.15, 10],
+          colors: [Color(0xFFFFFFFF), Color.fromARGB(255, 222, 137, 255)]));
+  const Background_email_message({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +42,8 @@ class CircleBox extends StatelessWidget {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const RadialGradient(colors: [
-              Color.fromARGB(255, 32, 192, 255),
-              Color.fromARGB(255, 162, 218, 255),
+              Color.fromARGB(255, 166, 32, 255),
+              Color.fromARGB(255, 218, 162, 255),
             ])),
       ),
     );
@@ -62,8 +61,8 @@ class CircleBox_1 extends StatelessWidget {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const RadialGradient(colors: [
-              Color.fromARGB(255, 32, 192, 255),
-              Color.fromARGB(255, 162, 218, 255),
+              Color.fromARGB(255, 184, 32, 255),
+              Color.fromARGB(255, 229, 162, 255),
             ])),
       ),
     );
@@ -81,8 +80,8 @@ class CircleBox_2 extends StatelessWidget {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const RadialGradient(colors: [
-              Color.fromARGB(255, 78, 205, 255),
-              Color.fromARGB(255, 180, 225, 255),
+              Color.fromARGB(255, 190, 78, 255),
+              Color.fromARGB(255, 228, 180, 255),
             ])),
       ),
     );
@@ -100,8 +99,8 @@ class CircleBox_3 extends StatelessWidget {
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const RadialGradient(colors: [
-              Color.fromARGB(255, 106, 213, 255),
-              Color.fromARGB(255, 196, 232, 255),
+              Color.fromARGB(255, 200, 106, 255),
+              Color.fromARGB(255, 238, 196, 255),
             ])),
       ),
     );

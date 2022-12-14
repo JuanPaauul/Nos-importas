@@ -1,9 +1,10 @@
-// ignore_for_file: library_private_types_in_public_api, unused_local_variable, deprecated_member_use, duplicate_ignore
-
+// ignore_for_file: library_private_types_in_public_api, unused_local_variable, deprecated_member_use, duplicate_ignore, prefer_const_constructors
 import 'package:flutter/material.dart';
+
+import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
-import 'package:nos_importas/widget/background.dart';
-import 'package:nos_importas/widget/background_1.dart';
+import 'package:nos_importas/screens/utils.dart';
+import 'package:nos_importas/widget/background_2.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -17,87 +18,78 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Stack(
+    return Stack(
+      // ignore: prefer_const_literals_to_create_immutables
+      children: [
+        Background(),
+        Table(
           children: [
-            Background_1(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+            TableRow(children: [
+              Container(
+                width: 125,
+                height: 125,
+              ),
+              Container(
+                width: 125,
+                height: 125,
+              ),
+            ]),
+            TableRow(
+              children: [
                 TextButton(
-                  child: ElevatedButton.icon(
-                    style: TextButton.styleFrom(backgroundColor: Colors.black),
-                    label: const Text(
-                      'Tomar Fotografia',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.camera,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {
-                      _openCamera();
-                    },
+                  child: SingleCard(
+                    color: Color.fromARGB(255, 0, 121, 36),
+                    colorRGBO: Color.fromARGB(45, 0, 121, 36),
+                    icon: Icons.camera_alt_outlined,
+                    text: '   Tomar foto    ',
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _openCamera();
+                  },
                 ),
                 TextButton(
-                  child: ElevatedButton.icon(
-                    style: TextButton.styleFrom(backgroundColor: Colors.black),
-                    label: const Text(
-                      'Tomar Video',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.video_call,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {
-                      _openVideo();
-                    },
+                  child: SingleCard(
+                    color: Color.fromARGB(255, 0, 17, 255),
+                    colorRGBO: Color.fromARGB(45, 0, 17, 255),
+                    icon: Icons.videocam_outlined,
+                    text: '       Video         ',
                   ),
-                  onPressed: () {},
-                ),
-                TextButton(
-                  child: ElevatedButton.icon(
-                    style: TextButton.styleFrom(backgroundColor: Colors.black),
-                    label: const Text(
-                      'Seleccionar de Galeria',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 21,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white),
-                    ),
-                    icon: const Icon(
-                      Icons.photo_album,
-                      size: 40,
-                      color: Colors.blue,
-                    ),
-                    onPressed: () {
-                      _openGallery();
-                    },
-                  ),
-                  onPressed: () {},
+                  onPressed: () => _openVideo(),
                 ),
               ],
             ),
+            TableRow(children: [
+              TextButton(
+                child: SingleCard(
+                  color: Color.fromARGB(255, 255, 94, 0),
+                  colorRGBO: Color.fromARGB(45, 255, 94, 0),
+                  icon: Icons.video_library_outlined,
+                  text: '      Galeria       ',
+                ),
+                onPressed: () {
+                  _openGallery();
+                },
+              ),
+              TextButton(
+                child: SingleCard(
+                  color: Color.fromARGB(255, 184, 33, 243),
+                  colorRGBO: Color.fromARGB(45, 184, 33, 243),
+                  icon: Icons.email_outlined,
+                  text: '       Enviar       \n       Correo',
+                ),
+                onPressed: () => Utils.openEmail(
+                  // Si son mas de 2 correos separar con ',' dentro la cadena.
+                  toEmail: 'ciudadcochabamba1@gmail.com',
+                  subject: 'ALERTA DE AUXLIO',
+                  body: 'Necesito ayuda, por favor estoy en apuros!',
+                ),
+              ),
+            ])
           ],
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ],
     );
+//      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
   }
 
   void _openCamera() {
@@ -124,5 +116,66 @@ class _CameraPageState extends State<CameraPage> {
       source: ImageSource.gallery,
     );
     Navigator.pop(context);
+  }
+}
+
+class SingleCard extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String text;
+  final Color colorRGBO;
+
+  const SingleCard({
+    super.key,
+    required this.icon,
+    required this.color,
+    required this.text,
+    required this.colorRGBO,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
+      margin: EdgeInsets.all(15),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(40),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+          child: Container(
+            height: 180,
+            decoration: BoxDecoration(
+                color: colorRGBO,
+                //color: Color.fromRGBO(62, 66, 107, 0.15),
+                borderRadius: BorderRadius.circular(40)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: color,
+                  child: Icon(
+                    icon,
+                    size: 60,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  radius: 50,
+                ),
+                SizedBox(
+                  height: 10,
+                  width: 30,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 25,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

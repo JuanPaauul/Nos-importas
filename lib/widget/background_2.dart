@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +24,7 @@ class Background extends StatelessWidget {
         Positioned(top: -180, left: 80, child: BlueBox()),
         Positioned(top: 565, left: -88, child: BlueBox()),
         Positioned(top: 510, left: 240, child: CircleBox()),
+        Positioned(top: 260, left: 67, child: BlueBox_1()),
       ],
     );
   }
