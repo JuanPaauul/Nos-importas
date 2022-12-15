@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:nos_importas/screens/register_user.dart';
 import 'package:nos_importas/widget/background.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -83,7 +86,7 @@ class _UserFormState extends State<UserForm>
 
   Future<String> notifyUser(String email) async {
     final response = await http.get(Uri.parse(
-        "https://appprevriskapi-production.up.railway.app/api/userinformation/uid/${email}"));
+        "https://appprevriskapi-production.up.railway.app/api/userinformation/email/${email}"));
     if (response.statusCode == 200) {
       return "El usuario fue notificado";
     }
@@ -129,4 +132,6 @@ class _UserFormState extends State<UserForm>
       ),
     );
   }
+
+  
 }
