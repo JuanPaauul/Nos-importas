@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nos_importas/screens/utils/map_style.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as map_tool;
+import 'package:vibration/vibration.dart';
 
 class MapsController extends ChangeNotifier {
   final Map<MarkerId, Marker> _markers = {};
@@ -73,6 +74,17 @@ class MapsController extends ChangeNotifier {
     //punta inferior sud oeste
     map_tool.LatLng(-17.373625, -66.144058)
   ];
+  List<map_tool.LatLng> coorGreenTool = [
+    //punta superior norteste
+    map_tool.LatLng(-17.369556, -66.143199),
+    // supe norte oeste
+    map_tool.LatLng(-17.369045, -66.144217),
+    //punta infe sud oeste
+    map_tool.LatLng(-17.373526, -66.145913),
+    //punta inferior sud este
+    map_tool.LatLng(-17.373625, -66.144058)
+  ];
+
   List<LatLng> coorRed = [
     //punta superior norteoes
     LatLng(-17.369556, -66.143199),
@@ -101,6 +113,18 @@ class MapsController extends ChangeNotifier {
       coorRedTool,
       false,
     );
+    if (isInSelectedArea) {
+      Vibration.vibrate(duration: 2000);
+    } else {
+      isInSelectedArea = map_tool.PolygonUtil.containsLocation(
+        map_tool.LatLng(poitLatLng.latitude, poitLatLng.longitude),
+        coorGreenTool,
+        false,
+      );
+      if (isInSelectedArea == false) {
+        Vibration.vibrate(duration: 2000);
+      }
+    }
     //});
     return isInSelectedArea;
   }

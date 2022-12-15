@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 /*import 'package:nos_importas/functions/input_file.dart';
 import 'package:nos_importas/screens/app_screen.dart';*/
 import 'package:nos_importas/screens/maps/maps_controller.dart';
+import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 bool check = false;
 /*
@@ -22,7 +25,25 @@ class MapsPage extends StatelessWidget {
 /*
   @override
   _MapsPageState createState() => _MapsPageState();*/
-
+  /*
+  void _showDialog(BuildContext newContext) {
+    showDialog(
+    barrierDismissible: false,
+        context: newContext,
+        child :AlertDialog(
+            title: Text('Zona peligrosa'),
+            content: Text(
+                'Usted acaba de ingresar a una zona preligros, !Puede que se encuntre en riesgo'),
+            actions: [
+              MaterialButton(
+                onPressed: () {},
+                child: Text('De Acuerdo'),
+              )
+            ],
+          );
+        });
+  }
+*/
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MapsController>(
@@ -42,12 +63,13 @@ class MapsPage extends StatelessWidget {
                       ElevatedButton(
                           onPressed: () {},
                           child: const Text(
-                            "Prender gps",
+                            "El mapa esta cargando",
                             textAlign: TextAlign.center,
                           ))
                     ]),
                   );
                 }
+
                 final initialCameraPosition = CameraPosition(
                   target: LatLng(
                     controller.initialPosition!.latitude,
@@ -55,23 +77,45 @@ class MapsPage extends StatelessWidget {
                   ),
                   zoom: 15,
                 );
+
+                print(controller.initialPosition!.latitude);
+                print(controller.initialPosition!.longitude);
+                //controller.newPolygon();
                 check = controller.checkoutUpdateLocation(LatLng(
                     controller.initialPosition!.latitude,
                     controller.initialPosition!.longitude));
 
                 print(check);
-                /*if (check) {
-                  return QuickAlert.show(
-                    //context: context,
-                    type: QuickAlertType.error,
-                    title: 'Reporte de Zona',
-                    text: 'Tu estas fuera del area segura',
-                  );
-                }*/
-                print(controller.initialPosition!.latitude);
-                print(controller.initialPosition!.longitude);
-                //controller.newPolygon();
-
+                if (check == true) {
+                  return (AlertDialog(
+                    title: Text('Zona peligrosa'),
+                    content: Text(
+                        'Usted acaba de ingresar a una zona preligros, !Puede que se encuntre en riesgo'),
+                    actions: [
+                      TextButton(onPressed: () {}, child: Text('Estoy bien')),
+                    ],
+                  ));
+                  /**/ /*
+                  return  Scaffold(
+                    body: 
+                      child: 
+                        showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: Text('Zona peligrosa'),
+                            content: Text(
+                                'Usted acaba de ingresar a una zona preligros, !Puede que se encuntre en riesgo'),
+                            actions: [
+                              MaterialButton(
+                                onPressed: () {NavigationBar.pop(context);},
+                                child: Text('De Acuerdo'),
+                              )
+                            ],
+                          );
+                        });
+                  );*/
+                }
                 return GoogleMap(
                   markers: controller.markers,
                   //polylines: controller.polylines,
