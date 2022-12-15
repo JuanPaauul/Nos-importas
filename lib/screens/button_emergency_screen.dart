@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
 import 'package:nos_importas/screens/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
@@ -54,56 +55,60 @@ class _MiPagina1State extends State<PanicPage>
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [
-      SliverAppBar(
-        elevation: 0.0,
-        pinned: true,
-        backgroundColor: Colors.pink,
-        expandedHeight: 200.0,
-        flexibleSpace: FlexibleSpaceBar(
-          background: Image.network(
-            image,
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
-      SliverAppBar(
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0.0,
           pinned: true,
-          primary: false,
-          elevation: 8.0,
           backgroundColor: Colors.pink,
-          title: Align(
-            alignment: AlignmentDirectional.center,
-            child: TabBar(
-                controller: tabController,
-                indicatorColor: Colors.greenAccent,
-                isScrollable: true,
-                tabs: const <Widget>[
-                  Tab(icon: Icon(Icons.radio_button_on), text: 'Botón'),
-                  Tab(icon: Icon(Icons.local_police), text: 'Policía'),
-                  Tab(icon: Icon(Icons.sms), text: 'SMS'),
-                  Tab(icon: Icon(Icons.whatsapp), text: 'WhatsApp'),
-                ]),
-          )),
-      SliverToBoxAdapter(
-          child: SizedBox(
-        height: 400.0,
-        child: Padding(
-          padding: const EdgeInsets.all(50.0),
-          child: TabBarView(
-            controller: tabController,
-            children: const [
-              Button(),
-              Police(),
-              Sms(),
-              Whatss(),
-            ],
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Image.network(
+              image,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
-      )),
-    ]);
-
-    //floatingActionButton: const BotonFlotante(),
+        SliverAppBar(
+            pinned: true,
+            primary: false,
+            elevation: 8.0,
+            backgroundColor: Colors.pink,
+            title: Align(
+              alignment: AlignmentDirectional.center,
+              child: TabBar(
+                  indicator: const BoxDecoration(
+                      borderRadius: BorderRadius.horizontal(),
+                      color: Colors.greenAccent),
+                  unselectedLabelColor: Colors.grey,
+                  labelColor: Colors.black,
+                  controller: tabController,
+                  isScrollable: true,
+                  tabs: const <Widget>[
+                    Tab(icon: Icon(Icons.radio_button_on), text: 'Botón'),
+                    Tab(icon: Icon(Icons.local_police), text: 'Seguridad'),
+                    Tab(icon: Icon(Icons.sms), text: 'Mensajeria'),
+                    Tab(icon: Icon(Icons.wifi), text: 'Red Social'),
+                  ]),
+            )),
+        SliverToBoxAdapter(
+            child: SizedBox(
+          height: 450.0,
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: TabBarView(
+              controller: tabController,
+              children: const [
+                Button(),
+                Police(),
+                Sms(),
+                Whatss(),
+              ],
+            ),
+          ),
+        )),
+      ],
+    );
   }
 }
 
@@ -138,7 +143,7 @@ class PanicPageSetting extends StatelessWidget {
           }
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const BotonFlotante(),
     );
   }
@@ -191,8 +196,9 @@ class _ButtonState extends State<Button> {
                     child: const Text(
                       'EMERGENCIA',
                       style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: Colors.black,
-                          fontSize: 15,
+                          fontSize: 21,
                           fontStyle: FontStyle.normal),
                     ),
                     onPressed: () {
@@ -209,6 +215,9 @@ class _ButtonState extends State<Button> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       ),
     );
   }
@@ -304,6 +313,9 @@ class _PoliceState extends State<Police> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       );
 }
 
@@ -348,38 +360,67 @@ class _SmsState extends State<Sms> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       );
 }
 
 // Vista de Whattsapp \\
-class Whatss extends StatelessWidget {
+class Whatss extends StatefulWidget {
   const Whatss({Key? key}) : super(key: key);
 
+  @override
+  State<Whatss> createState() => _WhatssState();
+}
+
+class _WhatssState extends State<Whatss> {
   void launchWhatsapp({@required number, @required message}) async {
     String url = "whatsapp://send?phone=$number&text=$message";
 
-    // ignore: deprecated_member_use
-    await canLaunch(url) ? launch(url) : print("No se pudo abrir Whatsapp");
+    await launchUrlString(url)
+        ? launchUrlString(url)
+        : print("No se pudo abrir Whatsapp");
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // Por defecto \\
-              launchWhatsapp(
-                  number: "+75460326", message: "Alerta de Auxilio !!!");
-            },
-            child: const Text("Open Whatsapp"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Open WhatsApp',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.whatsapp,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto \\
+                    launchWhatsapp(
+                        number: "+59175460326",
+                        message: "Alerta de Auxilio !!!");
+                  },
+                ),
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
+      );
 }
 
 // Para contactos extraidos de un HTTP \\
@@ -389,7 +430,7 @@ class BotonFlotante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 117, 176, 39),
+        backgroundColor: const Color.fromARGB(255, 176, 121, 39),
         elevation: 0,
         highlightElevation: 0,
         child: const Icon(Icons.person_add),
