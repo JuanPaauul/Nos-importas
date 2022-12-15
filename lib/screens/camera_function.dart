@@ -74,15 +74,10 @@ class _CameraPageState extends State<CameraPage> {
                 child: SingleCard(
                   color: Color.fromARGB(255, 184, 33, 243),
                   colorRGBO: Color.fromARGB(45, 184, 33, 243),
-                  icon: Icons.email_outlined,
-                  text: '       Enviar       \n       Correo',
+                  icon: Icons.call_end_outlined,
+                  text: '       Llamada       \n       Telefono',
                 ),
-                onPressed: () => Utils.openEmail(
-                  // Si son mas de 2 correos separar con ',' dentro la cadena.
-                  toEmail: 'ciudadcochabamba1@gmail.com',
-                  subject: 'ALERTA DE AUXLIO',
-                  body: 'Necesito ayuda, por favor estoy en apuros!',
-                ),
+                onPressed: () => Utils.openPhoneCall(phoneNumber: '110'),
               ),
             ])
           ],

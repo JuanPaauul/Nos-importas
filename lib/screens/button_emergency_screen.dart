@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:nos_importas/models/reqres_model.dart';
 import 'package:nos_importas/screens/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 Future<ReqResRespuesta> getUsuarios() async {
   final resp = await http.get(Uri.parse('https://reqres.in/api/users'));
@@ -18,47 +19,96 @@ class PanicPage extends StatefulWidget {
   State<PanicPage> createState() => _MiPagina1State();
 }
 
-class _MiPagina1State extends State<PanicPage> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    const Button(),
-    const Police(),
-    const Sms(),
-    const Whatss(),
+class _MiPagina1State extends State<PanicPage>
+    with SingleTickerProviderStateMixin {
+  TabController? tabController;
+  int index = 0;
+  String image =
+      'https://media.istockphoto.com/id/479391700/es/vector/sos.jpg?s=612x612&w=0&k=20&c=FbbGhKYJiKzV3AQxt7rhdCVNVEgtWRPgckgF7kG9y2Y=';
+  List<String> miImages = [
+    'https://media.istockphoto.com/id/479391700/es/vector/sos.jpg?s=612x612&w=0&k=20&c=FbbGhKYJiKzV3AQxt7rhdCVNVEgtWRPgckgF7kG9y2Y=',
+    'https://seeklogo.com/images/P/policia-boliviana-logo-6D6E0297DB-seeklogo.com.jpg',
+    'https://img.freepik.com/vector-premium/concepto-smishing-mensaje-electronico-capturado-hacker-uso-fraudulento-alerta-estafa_594511-423.jpg?w=2000',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQruaf7V267l99k548J8fIA3SjcBf8f73lllA&usqp=CAU'
   ];
+
+  void _tabListener() {
+    setState(() {
+      index = tabController!.index;
+      image = miImages[index];
+    });
+  }
+
+  @override
+  void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    tabController!.addListener(_tabListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController!.removeListener(_tabListener);
+    tabController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 25.0,
-        selectedFontSize: 22.0,
-        unselectedFontSize: 17.0,
-        backgroundColor: Colors.pink,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(1.0),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.radio_button_on), label: ('Boton')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_police), label: ('Policia')),
-          BottomNavigationBarItem(icon: Icon(Icons.sms), label: ('SMS')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.whatsapp), label: ('WhatsApp')),
-        ],
-      ),
-      floatingActionButton: const BotonFlotante(),
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0.0,
+          pinned: true,
+          backgroundColor: Colors.pink,
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Image.network(
+              image,
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        SliverAppBar(
+            pinned: true,
+            primary: false,
+            elevation: 8.0,
+            backgroundColor: Colors.pink,
+            title: Align(
+              alignment: AlignmentDirectional.center,
+              child: TabBar(
+                  indicator: const BoxDecoration(
+                      borderRadius: BorderRadius.horizontal(),
+                      color: Colors.greenAccent),
+                  unselectedLabelColor: Colors.grey,
+                  labelColor: Colors.black,
+                  controller: tabController,
+                  isScrollable: true,
+                  tabs: const <Widget>[
+                    Tab(icon: Icon(Icons.radio_button_on), text: 'Botón'),
+                    Tab(icon: Icon(Icons.local_police), text: 'Seguridad'),
+                    Tab(icon: Icon(Icons.sms), text: 'Mensajeria'),
+                    Tab(icon: Icon(Icons.wifi), text: 'Red Social'),
+                  ]),
+            )),
+        SliverToBoxAdapter(
+            child: SizedBox(
+          height: 450.0,
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: TabBarView(
+              controller: tabController,
+              children: const [
+                Button(),
+                Police(),
+                Sms(),
+                Whatss(),
+              ],
+            ),
+          ),
+        )),
+      ],
     );
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }
 
@@ -93,7 +143,7 @@ class PanicPageSetting extends StatelessWidget {
           }
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const BotonFlotante(),
     );
   }
@@ -144,10 +194,11 @@ class _ButtonState extends State<Button> {
                 child: ShinyButton(
                     color: Colors.red,
                     child: const Text(
-                      'Emergencia',
+                      'EMERGENCIA',
                       style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: Colors.black,
-                          fontSize: 35,
+                          fontSize: 21,
                           fontStyle: FontStyle.normal),
                     ),
                     onPressed: () {
@@ -164,6 +215,9 @@ class _ButtonState extends State<Button> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       ),
     );
   }
@@ -259,6 +313,9 @@ class _PoliceState extends State<Police> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       );
 }
 
@@ -303,38 +360,66 @@ class _SmsState extends State<Sms> {
             ],
           ),
         ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
       );
 }
 
 // Vista de Whattsapp \\
-class Whatss extends StatelessWidget {
+class Whatss extends StatefulWidget {
   const Whatss({Key? key}) : super(key: key);
 
-  void launchWhatsapp({@required number, @required message}) async {
-    String url = "whatsapp://send?phone=$number&text=$message";
+  @override
+  State<Whatss> createState() => _WhatssState();
+}
 
-    // ignore: deprecated_member_use
-    await canLaunch(url) ? launch(url) : print("No se pudo abrir Whatsapp");
+class _WhatssState extends State<Whatss> {
+  void launchWhatsapp({@required phone, @required message}) async {
+    String url = "https://wa.me/$phone/?text=${Uri.parse(message)}";
+
+    await launchUrlString(url)
+        ? launchUrlString(url)
+        : print("No se pudo abrir Whatsapp");
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // Por defecto \\
-              launchWhatsapp(
-                  number: "+75460326", message: "Alerta de Auxilio !!!");
-            },
-            child: const Text("Open Whatsapp"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                child: ElevatedButton.icon(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  label: const Text(
+                    'Open WhatsApp',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.whatsapp,
+                    size: 40,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    // Por defecto \\
+                    launchWhatsapp(
+                        phone: "75460326", message: "Alerta de Auxilio !!!");
+                  },
+                ),
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniEndDocked,
+        floatingActionButton: const BotonFlotante(),
+      );
 }
 
 // Para contactos extraidos de un HTTP \\
@@ -344,7 +429,7 @@ class BotonFlotante extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 117, 176, 39),
+        backgroundColor: const Color.fromARGB(255, 176, 121, 39),
         elevation: 0,
         highlightElevation: 0,
         child: const Icon(Icons.person_add),
