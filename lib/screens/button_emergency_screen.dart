@@ -375,8 +375,8 @@ class Whatss extends StatefulWidget {
 }
 
 class _WhatssState extends State<Whatss> {
-  void launchWhatsapp({@required number, @required message}) async {
-    String url = "whatsapp://send?phone=$number&text=$message";
+  void launchWhatsapp({@required phone, @required message}) async {
+    String url = "https://wa.me/$phone/?text=${Uri.parse(message)}";
 
     await launchUrlString(url)
         ? launchUrlString(url)
@@ -408,8 +408,7 @@ class _WhatssState extends State<Whatss> {
                   onPressed: () {
                     // Por defecto \\
                     launchWhatsapp(
-                        number: "+59175460326",
-                        message: "Alerta de Auxilio !!!");
+                        phone: "75460326", message: "Alerta de Auxilio !!!");
                   },
                 ),
                 onPressed: () {},
