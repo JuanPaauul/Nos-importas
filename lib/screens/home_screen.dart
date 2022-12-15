@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nos_importas/screens/button_emergency_screen.dart';
+import 'package:nos_importas/screens/camera_function.dart';
 import 'package:nos_importas/screens/maps/screen_redirect.dart';
 import 'package:nos_importas/screens/register_user.dart';
 import 'package:nos_importas/screens/sign_up_screen.dart';
@@ -23,7 +27,8 @@ class HomePage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Center(child: Text('Hubo un error!'));
             } else {
-              return const SignUpPage();
+              //return const SignUpPage();
+              return const PanicPage();
             }
           },
         ),

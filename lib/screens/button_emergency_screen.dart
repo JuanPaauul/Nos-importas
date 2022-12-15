@@ -18,47 +18,92 @@ class PanicPage extends StatefulWidget {
   State<PanicPage> createState() => _MiPagina1State();
 }
 
-class _MiPagina1State extends State<PanicPage> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    const Button(),
-    const Police(),
-    const Sms(),
-    const Whatss(),
+class _MiPagina1State extends State<PanicPage>
+    with SingleTickerProviderStateMixin {
+  TabController? tabController;
+  int index = 0;
+  String image =
+      'https://media.istockphoto.com/id/479391700/es/vector/sos.jpg?s=612x612&w=0&k=20&c=FbbGhKYJiKzV3AQxt7rhdCVNVEgtWRPgckgF7kG9y2Y=';
+  List<String> miImages = [
+    'https://media.istockphoto.com/id/479391700/es/vector/sos.jpg?s=612x612&w=0&k=20&c=FbbGhKYJiKzV3AQxt7rhdCVNVEgtWRPgckgF7kG9y2Y=',
+    'https://seeklogo.com/images/P/policia-boliviana-logo-6D6E0297DB-seeklogo.com.jpg',
+    'https://img.freepik.com/vector-premium/concepto-smishing-mensaje-electronico-capturado-hacker-uso-fraudulento-alerta-estafa_594511-423.jpg?w=2000',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQruaf7V267l99k548J8fIA3SjcBf8f73lllA&usqp=CAU'
   ];
+
+  void _tabListener() {
+    setState(() {
+      index = tabController!.index;
+      image = miImages[index];
+    });
+  }
+
+  @override
+  void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    tabController!.addListener(_tabListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController!.removeListener(_tabListener);
+    tabController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        type: BottomNavigationBarType.fixed,
-        iconSize: 25.0,
-        selectedFontSize: 22.0,
-        unselectedFontSize: 17.0,
+    return CustomScrollView(slivers: [
+      SliverAppBar(
+        elevation: 0.0,
+        pinned: true,
         backgroundColor: Colors.pink,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(1.0),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.radio_button_on), label: ('Boton')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_police), label: ('Policia')),
-          BottomNavigationBarItem(icon: Icon(Icons.sms), label: ('SMS')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.whatsapp), label: ('WhatsApp')),
-        ],
+        expandedHeight: 200.0,
+        flexibleSpace: FlexibleSpaceBar(
+          background: Image.network(
+            image,
+            fit: BoxFit.fill,
+          ),
+        ),
       ),
-      floatingActionButton: const BotonFlotante(),
-    );
-  }
+      SliverAppBar(
+          pinned: true,
+          primary: false,
+          elevation: 8.0,
+          backgroundColor: Colors.pink,
+          title: Align(
+            alignment: AlignmentDirectional.center,
+            child: TabBar(
+                controller: tabController,
+                indicatorColor: Colors.greenAccent,
+                isScrollable: true,
+                tabs: const <Widget>[
+                  Tab(icon: Icon(Icons.radio_button_on), text: 'Botón'),
+                  Tab(icon: Icon(Icons.local_police), text: 'Policía'),
+                  Tab(icon: Icon(Icons.sms), text: 'SMS'),
+                  Tab(icon: Icon(Icons.whatsapp), text: 'WhatsApp'),
+                ]),
+          )),
+      SliverToBoxAdapter(
+          child: SizedBox(
+        height: 400.0,
+        child: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: TabBarView(
+            controller: tabController,
+            children: const [
+              Button(),
+              Police(),
+              Sms(),
+              Whatss(),
+            ],
+          ),
+        ),
+      )),
+    ]);
 
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    //floatingActionButton: const BotonFlotante(),
   }
 }
 
@@ -144,10 +189,10 @@ class _ButtonState extends State<Button> {
                 child: ShinyButton(
                     color: Colors.red,
                     child: const Text(
-                      'Emergencia',
+                      'EMERGENCIA',
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 35,
+                          fontSize: 15,
                           fontStyle: FontStyle.normal),
                     ),
                     onPressed: () {
