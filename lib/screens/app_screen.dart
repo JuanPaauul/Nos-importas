@@ -2,12 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nos_importas/screens/maps/maps_screen.dart';
 import 'package:nos_importas/screens/profile_screen.dart';
-import 'package:nos_importas/screens/maps/screen_controller.dart';
 import 'package:nos_importas/screens/user_confidence_list.dart';
-import 'package:nos_importas/screens/user_form_screen.dart';
-import 'package:nos_importas/screens/show_trust_users.dart';
 import 'package:nos_importas/screens/button_emergency_screen.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:nos_importas/screens/camera_function.dart';
 import 'package:nos_importas/screens/send_mail.dart';
 
@@ -21,19 +17,9 @@ class AppPage extends StatefulWidget {
 enum options { A }
 
 class _AppPageState extends State<AppPage> {
-  //final _controller = ScreenController(Permission.locationAlways);
-  //final _controller = ScreenController(Permission.locationWhenInUse);
   @override
   void initState() {
     super.initState();
-    /*WidgetsBinding.instance.addPostFrameCallback((_) {
-      _controller.checkPermission();
-    });
-    _controller.addListener(() {
-      if (_controller.routeName != null) {
-        Navigator.pushReplacementNamed(context, _controller.routeName!);
-      }
-    });*/
   }
 
   int currentPage = 1;
@@ -72,13 +58,12 @@ class _AppPageState extends State<AppPage> {
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [
-          const UserList(),
-          const MapsPage(),
-          const PanicPage(),
-          const CameraPage(),
-          const SendEmail(
+        children: const [
+          UserList(),
+          MapsPage(),
+          PanicPage(),
+          CameraPage(),
+          SendEmail(
             title: '',
           ),
         ],
