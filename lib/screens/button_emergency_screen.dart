@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:ffi';
+import 'dart:io';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -375,12 +376,17 @@ class Whatss extends StatefulWidget {
 }
 
 class _WhatssState extends State<Whatss> {
-  void launchWhatsapp({@required phone, @required message}) async {
-    String url = "https://wa.me/$phone/?text=${Uri.parse(message)}";
+  whatsapp() async {
+    var contact = "+59175460326";
+    var androidUrl = "whatsapp://send?phone=$contact&text=Hi, I need some help";
+    var iosUrl =
+        "https://wa.me/$contact?text=${Uri.parse('Hi, I need some help')}";
 
-    await launchUrlString(url)
-        ? launchUrlString(url)
-        : print("No se pudo abrir Whatsapp");
+    if (Platform.isIOS) {
+      await launchUrl(Uri.parse(iosUrl));
+    } else {
+      await launchUrl(Uri.parse(androidUrl));
+    }
   }
 
   @override
@@ -407,8 +413,7 @@ class _WhatssState extends State<Whatss> {
                   ),
                   onPressed: () {
                     // Por defecto \\
-                    launchWhatsapp(
-                        phone: "75460326", message: "Alerta de Auxilio !!!");
+                    whatsapp();
                   },
                 ),
                 onPressed: () {},
